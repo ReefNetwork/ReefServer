@@ -12,15 +12,20 @@ version = "1.0-SNAPSHOT"
 repositories {
     mavenCentral()
     maven(
+        url  = uri("https://jitpack.io")
+    )
+    maven(
         url = uri("https://repo.nukkitx.com/main/")
     )
 }
 
 dependencies {
+    compileOnly("com.github.bbo51dog:Ecokkit:1.0.1")
+    testCompileOnly("com.github.bbo51dog:Ecokkit:1.0.1")
     compileOnly("cn.nukkit:nukkit:1.0-SNAPSHOT")
     testCompileOnly("cn.nukkit:nukkit:1.0-SNAPSHOT")
-    implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation ("org.xerial:sqlite-jdbc:3.30.1")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.xerial:sqlite-jdbc:3.30.1")
 }
 
 configure<JavaPluginConvention> {
