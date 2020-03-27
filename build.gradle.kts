@@ -20,6 +20,7 @@ repositories {
 }
 
 dependencies {
+    compile("com.fasterxml.jackson.module:jackson-module-kotlin:2.10.3")
     compileOnly("com.github.bbo51dog:Ecokkit:1.0.1")
     testCompileOnly("com.github.bbo51dog:Ecokkit:1.0.1")
     compileOnly("cn.nukkit:nukkit:1.0-SNAPSHOT")
