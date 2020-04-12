@@ -1,4 +1,3 @@
-start minecraft.cmd
 move build\libs\ReefSeichi-1.0-SNAPSHOT-all.jar D:\code\nukkit\plugins
 cd D:\code\nukkit
 @color 0a

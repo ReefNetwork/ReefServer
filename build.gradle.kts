@@ -10,6 +10,7 @@ group = "net.ree-jp"
 version = "1.0-SNAPSHOT"
 
 repositories {
+    jcenter()
     mavenCentral()
     maven(
         url  = uri("https://jitpack.io")
@@ -26,7 +27,8 @@ dependencies {
     testCompileOnly("cn.nukkit:nukkit:1.0-SNAPSHOT")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.xerial:sqlite-jdbc:3.30.1")
-    implementation("com.squareup.moshi:moshi:1.9.2")
+    implementation ("com.github.Tea-Ayataka:Kordis:0.2.3")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5")
 }
 
 configure<JavaPluginConvention> {
