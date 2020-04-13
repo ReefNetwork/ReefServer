@@ -10,4 +10,4 @@ build_job_1:
     - ./gradlew shadow
   artifacts:
     paths:
-      - build\libs\*.jar
+      - build/libs/*.jar
