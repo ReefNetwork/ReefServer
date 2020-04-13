@@ -1,7 +1,10 @@
 package net.ree_jp.reefseichi.system.discord
 
 import cn.nukkit.Server
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import net.ayataka.kordis.DiscordClient
+import net.ayataka.kordis.entity.server.channel.text.ServerTextChannel
 import net.ree_jp.reefseichi.event.DiscordListener
 
 class DiscordBot(private val client: DiscordClient) {
@@ -15,12 +18,22 @@ class DiscordBot(private val client: DiscordClient) {
         client.addListener(DiscordListener())
     }
 
-    suspend fun sendMessage(text: String) {
+    fun sendMessage(text: String) {
         try {
-            client.servers.find(serverId)?.textChannels?.find(channelId)?.send(text)
+            GlobalScope.launch {
+                getChannel().send(text)
+            }
         } catch (ex: Exception) {
             Server.getInstance()
                 .broadcastMessage("discordに接続できませんでした" + ex.message)
+        }
+    }
+
+    private fun getChannel(): ServerTextChannel {
+        try {
+            return client.servers.find(serverId)?.textChannels?.find(channelId)!!
+        } catch (ex: Exception) {
+            throw ex
         }
     }
 }
