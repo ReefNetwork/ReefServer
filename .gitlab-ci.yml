@@ -1,0 +1,9 @@
+image: openjdk:latest
+
+stages:
+  - build
+
+build_job_1:
+  stage: build
+  script:
+    - gradlew shadow
