@@ -32,11 +32,14 @@ class ReefSeichiPlugin : PluginBase() {
 
         listenerRegister()
         Thread.sleep(1000)
+        ReefDiscord.getBot().sendMessage("サーバーが起動しました")
         logger.info(TextFormat.GREEN.toString() + "Reef" + TextFormat.YELLOW + "Seichi" + TextFormat.LIGHT_PURPLE + "Enable")
         super.onEnable()
     }
 
     override fun onDisable() {
+        ReefDiscord.getBot().sendMessage("サーバーを停止しました")
+        Thread.sleep(300)
         logger.info(TextFormat.GREEN.toString() + "Reef" + TextFormat.YELLOW + "Seichi" + TextFormat.GRAY + "Disable")
         super.onDisable()
     }
