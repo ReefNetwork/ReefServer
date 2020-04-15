@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="userDB.db" uuid="b6268454-bd9c-44db-9aea-fe271ed749fb">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:D:\code\nukkit\plugins\ReefSeichi\userDB.db</jdbc-url>
-    </data-source>
-    <data-source source="LOCAL" name="banDB.db" uuid="4b3b7e2e-9e2b-4c6e-baad-051f34b4b624">
+    <data-source source="LOCAL" name="banDB.db" uuid="e0ecaf92-5308-4a08-b8ef-f64ab7563158">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:D:\code\nukkit\plugins\ReefSeichi\banDB.db</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="userDB.db" uuid="fb259fac-b09b-4f64-9dad-e4ab65246fb1">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:D:\code\nukkit\plugins\ReefSeichi\userDB.db</jdbc-url>
     </data-source>
   </component>
 </project>
