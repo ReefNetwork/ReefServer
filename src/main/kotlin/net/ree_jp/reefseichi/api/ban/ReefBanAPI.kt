@@ -25,12 +25,12 @@ class ReefBanAPI(private val helper: BanHelper) : IReefBanAPI {
     override fun isBan(xuid: String, address: String, deviceId: String): Boolean {
         for (user: String in getAllBanUser()) {
             val userResult = ReefAPI.getInstance().getUser(user)
-            if (user == xuid) return false
+            if (user == xuid) return true
             for (userAddress in userResult.address) {
-                if (address == userAddress) return false
+                if (address == userAddress) return true
             }
             for (userDeviceId in userResult.deviceId) {
-                if (deviceId == userDeviceId) return false
+                if (deviceId == userDeviceId) return true
             }
         }
         return false
