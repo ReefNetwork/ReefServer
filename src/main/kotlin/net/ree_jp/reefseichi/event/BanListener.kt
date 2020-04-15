@@ -22,7 +22,7 @@ class BanListener : Listener {
             try {
                 val banXuid = api.getBanXuid(xuid, ip, deviceId)
                 val reason = BanHelper.getInstance().getBanReason(banXuid)
-                p.kick("banned for reef server\nbanId : $banXuid\nreason : $reason")
+                p.kick("banned for reef server\nbanId : $banXuid\nreason : $reason", false)
             }catch (ex: Exception) {
                 p.kick("ReefBanSystemError\n${ex.message}")
             }

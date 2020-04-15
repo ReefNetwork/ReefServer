@@ -43,7 +43,7 @@ class BanHelper(path: String) : IBanHelper {
         val stmt = connection.prepareStatement("SELECT reason FROM ban WHERE xuid = ?")
         stmt.setString(1, xuid)
         val result = stmt.executeQuery()
-        return result.getString(0)
+        return result.getString("reason")
     }
 
     override fun setBanUser(xuid: String, reason: String, ban: Boolean) {
