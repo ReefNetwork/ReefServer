@@ -25,7 +25,7 @@ class ReefHelper(path: String) : IReefHelper {
     init {
         try {
             Class.forName("org.sqlite.JDBC")
-            connection = DriverManager.getConnection("jdbc:sqlite:$path\\userDB.db")
+            connection = DriverManager.getConnection("jdbc:sqlite:$path/userDB.db")
             connection.createStatement()
                 .execute("CREATE TABLE IF NOT EXISTS user (xuid TEXT NOT NULL PRIMARY KEY, name TEXT NOT NULL, address TEXT NOT NULL, deviceId TEXT NOT NULL)")
         } catch (ex: SQLiteException) {
@@ -86,16 +86,21 @@ class ReefHelper(path: String) : IReefHelper {
     override fun setUser(xuid: String, name: String, address: List<String>, deviceId: List<String>) {
 
         try {
-            val stmt = if (isExistsUser(xuid)) {
-                connection.prepareStatement("UPDATE user SET name = ?, address = ?, deviceId = ?, WHERE xuid = ?")
+            if (isExistsUser(xuid)) {
+                val stmt = connection.prepareStatement("UPDATE user SET name = ?, address = ?, deviceId = ? WHERE xuid = ?")
+                stmt.setString(1, name)
+                stmt.setString(2, address.joinToString(","))
+                stmt.setString(3, deviceId.joinToString(","))
+                stmt.setString(4, xuid)
+                stmt.executeUpdate()
             } else {
-                connection.prepareStatement("INSERT INTO user VALUES (xuid = ?, name = ?, address = ?, deviceId = ?)")
+                val stmt = connection.prepareStatement("INSERT INTO user VALUES (?, ?, ?, ?)")
+                stmt.setString(1, xuid)
+                stmt.setString(2, name)
+                stmt.setString(3, address.joinToString(","))
+                stmt.setString(4, deviceId.joinToString(","))
+                stmt.executeUpdate()
             }
-            stmt.setString(1, name)
-            stmt.setString(2, address.joinToString(","))
-            stmt.setString(3, deviceId.joinToString(","))
-            stmt.setString(4, xuid)
-            stmt.executeUpdate()
         } catch (ex: SQLiteException) {
             throw ex
         }

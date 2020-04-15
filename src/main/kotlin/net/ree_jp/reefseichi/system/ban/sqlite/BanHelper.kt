@@ -24,7 +24,7 @@ class BanHelper(path: String) : IBanHelper {
     init {
         try {
             Class.forName("org.sqlite.JDBC")
-            connection = DriverManager.getConnection("jdbc:sqlite:$path\\banDB.db")
+            connection = DriverManager.getConnection("jdbc:sqlite:$path/banDB.db")
             connection.createStatement().execute("CREATE TABLE IF NOT EXISTS ban (xuid TEXT NOT NULL PRIMARY KEY, reason TEXT)")
         } catch (ex: SQLiteException) {
             throw ex
@@ -70,7 +70,6 @@ class BanHelper(path: String) : IBanHelper {
 
     override fun getAllBanUser(): List<String> {
         val result = connection.createStatement().executeQuery("SELECT xuid FROM ban")
-        result.first()
         val list = mutableListOf<String>()
         while (result.next()) list.add(result.getString("xuid"))
         return list
