@@ -1,6 +1,6 @@
-package net.ree_jp.reefseichi.system.customMessage.sqlite
+package net.ree_jp.reefseichi.sqlite
 
-interface ICustomMessageHelper {
+interface ISqliteHelper {
 
     fun isExists(xuid: String): Boolean
 

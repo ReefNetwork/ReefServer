@@ -1,10 +1,11 @@
 package net.ree_jp.reefseichi.system.customMessage.sqlite
 
+import net.ree_jp.reefseichi.sqlite.ISqliteHelper
 import org.sqlite.SQLiteException
 import java.sql.Connection
 import java.sql.DriverManager
 
-class CustomMessageHelper(path: String) : ICustomMessageHelper {
+class CustomMessageHelper(path: String) : ISqliteHelper {
 
     private var connection: Connection
 
