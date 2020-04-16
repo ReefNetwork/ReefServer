@@ -45,7 +45,7 @@ class CustomMessageHelper(path: String) : ICustomMessageHelper {
     }
 
     override fun setMessage(xuid: String, key: String, value: String) {
-        if (!isExists(xuid)) return
+        if (!isExists(xuid)) setTable(xuid)
 
         val stmt = connection.prepareStatement("REPLACE INTO '$xuid' VALUES (?, ?)")
         stmt.setString(1, key)
