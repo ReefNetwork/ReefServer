@@ -1,23 +1,10 @@
 package net.ree_jp.reefseichi.system.ban.sqlite
 
-import net.ree_jp.reefseichi.ReefSeichiPlugin
 import org.sqlite.SQLiteException
 import java.sql.Connection
 import java.sql.DriverManager
 
 class BanHelper(path: String) : IBanHelper {
-
-    companion object {
-
-        private lateinit var instance: BanHelper
-
-        fun getInstance(): BanHelper {
-            if (!::instance.isInitialized) {
-                instance = BanHelper(ReefSeichiPlugin.getInstance().dataFolder.path)
-            }
-            return instance
-        }
-    }
 
     private var connection: Connection
 

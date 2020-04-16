@@ -4,7 +4,7 @@ import cn.nukkit.event.EventHandler
 import cn.nukkit.event.Listener
 import cn.nukkit.event.player.PlayerPreLoginEvent
 import net.ree_jp.reefseichi.api.ban.ReefBanAPI
-import net.ree_jp.reefseichi.system.ban.sqlite.BanHelper
+import net.ree_jp.reefseichi.system.ban.ReefBan
 
 class BanListener : Listener {
 
@@ -21,7 +21,7 @@ class BanListener : Listener {
         if (api.isBan(xuid, ip, deviceId)) {
             try {
                 val banXuid = api.getBanXuid(xuid, ip, deviceId)
-                val reason = BanHelper.getInstance().getBanReason(banXuid)
+                val reason = ReefBan.getHelper().getBanReason(banXuid)
                 p.kick("banned for reef server\nbanId : $banXuid\nreason : $reason", false)
             }catch (ex: Exception) {
                 p.kick("ReefBanSystemError\n${ex.message}")

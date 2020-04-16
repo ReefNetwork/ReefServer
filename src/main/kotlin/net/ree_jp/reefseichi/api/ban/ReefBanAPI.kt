@@ -1,7 +1,7 @@
 package net.ree_jp.reefseichi.api.ban
 
 import net.ree_jp.reefseichi.api.ReefAPI
-import net.ree_jp.reefseichi.result.UserResult
+import net.ree_jp.reefseichi.system.ban.ReefBan
 import net.ree_jp.reefseichi.system.ban.sqlite.BanHelper
 
 class ReefBanAPI(private val helper: BanHelper) : IReefBanAPI {
@@ -12,7 +12,7 @@ class ReefBanAPI(private val helper: BanHelper) : IReefBanAPI {
 
         fun getInstance(): ReefBanAPI {
             if (!::instance.isInitialized) {
-                instance = ReefBanAPI(BanHelper.getInstance())
+                instance = ReefBanAPI(ReefBan.getHelper())
             }
             return instance
         }
