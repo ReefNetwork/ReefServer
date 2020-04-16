@@ -18,22 +18,20 @@ class CustomMessageHelper(path: String) : ICustomMessageHelper {
     }
 
     override fun isExists(xuid: String): Boolean {
-        val stmt = connection.prepareStatement("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table' AND name = ?")
-        stmt.setString(1, xuid)
-        return stmt.executeQuery().next()
+        return connection.createStatement().executeQuery("SELECT name FROM sqlite_master WHERE type = 'table' AND name = '$xuid'").next()
     }
 
     override fun setTable(xuid: String) {
         if (isExists(xuid)) return
 
         connection.createStatement()
-            .execute("CREATE TABLE IF NOT EXISTS [$xuid] (key TEXT NOT NULL PRIMARY KEY ,value TEXT NOT NULL)")
+            .execute("CREATE TABLE IF NOT EXISTS '$xuid' (key TEXT NOT NULL PRIMARY KEY ,value TEXT NOT NULL)")
     }
 
     override fun isExistsKey(xuid: String, key: String): Boolean {
         if (!isExists(xuid)) return false
 
-        val stmt = connection.prepareStatement("SELECT * FROM [$xuid] WHERE key = ?")
+        val stmt = connection.prepareStatement("SELECT * FROM '$xuid' WHERE key = ?")
         stmt.setString(1, key)
         return stmt.executeQuery().next()
     }
@@ -41,7 +39,7 @@ class CustomMessageHelper(path: String) : ICustomMessageHelper {
     override fun getMessage(xuid: String, key: String): String {
         if (!isExistsKey(xuid, key)) return ""
 
-        val stmt = connection.prepareStatement("SELECT value FROM [$xuid] WHERE key = ?")
+        val stmt = connection.prepareStatement("SELECT value FROM '$xuid' WHERE key = ?")
         stmt.setString(1, key)
         return stmt.executeQuery().getString("value")
     }
@@ -49,7 +47,7 @@ class CustomMessageHelper(path: String) : ICustomMessageHelper {
     override fun setMessage(xuid: String, key: String, value: String) {
         if (!isExists(xuid)) return
 
-        val stmt = connection.prepareStatement("REPLACE INTO [$xuid] VALUES (?, ?)")
+        val stmt = connection.prepareStatement("REPLACE INTO '$xuid' VALUES (?, ?)")
         stmt.setString(1, key)
         stmt.setString(2, value)
         stmt.execute()
