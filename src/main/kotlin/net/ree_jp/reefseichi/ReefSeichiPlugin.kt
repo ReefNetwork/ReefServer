@@ -3,6 +3,7 @@ package net.ree_jp.reefseichi
 import cn.nukkit.plugin.PluginBase
 import cn.nukkit.utils.TextFormat
 import net.ree_jp.reefseichi.event.BanListener
+import net.ree_jp.reefseichi.event.CustomMessageListener
 import net.ree_jp.reefseichi.event.DiscordSendListener
 import net.ree_jp.reefseichi.event.EventListener
 import net.ree_jp.reefseichi.system.discord.ReefDiscord
@@ -51,10 +52,12 @@ class ReefSeichiPlugin : PluginBase() {
     }
 
     private fun listenerRegister() {
+        val pm = server.pluginManager
 
-        server.pluginManager.registerEvents(EventListener(), this)
-        server.pluginManager.registerEvents(BanListener(), this)
-        server.pluginManager.registerEvents(DiscordSendListener(), this)
+        pm.registerEvents(EventListener(), this)
+        pm.registerEvents(BanListener(), this)
+        pm.registerEvents(CustomMessageListener(), this)
+        pm.registerEvents(DiscordSendListener(), this)
 
         ReefDiscord.login()
     }
