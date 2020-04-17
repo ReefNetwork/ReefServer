@@ -1,6 +1,6 @@
 package net.ree_jp.reefseichi.api
 
-import net.ree_jp.reefseichi.result.UserResult
+import net.ree_jp.reefseichi.data.User
 
 interface IReefAPI {
 
@@ -18,5 +18,5 @@ interface IReefAPI {
 
     fun addDevice(xuid: String, deviceId: String)
 
-    fun getUser(xuid: String): UserResult
+    fun getUser(xuid: String): User
 }

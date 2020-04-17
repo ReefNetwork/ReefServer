@@ -1,6 +1,6 @@
-package net.ree_jp.reefseichi.result
+package net.ree_jp.reefseichi.data
 
-interface IUserResult {
+interface IUser {
 
     val xuid: String
     val name: String

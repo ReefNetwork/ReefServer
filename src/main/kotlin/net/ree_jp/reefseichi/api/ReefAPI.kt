@@ -1,7 +1,6 @@
 package net.ree_jp.reefseichi.api
 
-import net.ree_jp.reefseichi.ReefSeichiPlugin
-import net.ree_jp.reefseichi.result.UserResult
+import net.ree_jp.reefseichi.data.User
 import net.ree_jp.reefseichi.sqlite.ReefHelper
 
 class ReefAPI(private val helper: ReefHelper): IReefAPI {
@@ -46,8 +45,8 @@ class ReefAPI(private val helper: ReefHelper): IReefAPI {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getUser(xuid: String): UserResult {
-        if (!isExists(xuid)) return UserResult.createResult(xuid)
+    override fun getUser(xuid: String): User {
+        if (!isExists(xuid)) return User.createResult(xuid)
 
         return helper.getUser(xuid)
     }
