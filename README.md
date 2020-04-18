@@ -1,5 +1,5 @@
 # ReefServer
-[![HomePage](https://img.shields.io/badge/Home-Page-lightgrey)](https://ree-jp.github.io/ReefServer/)
+[![HomePage](https://img.shields.io/badge/Home-Page-lightgrey)](https://ree-jp-minecraft.github.io/ReefServer/)
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 [![Maintainability](https://api.codeclimate.com/v1/badges/f3afa5c212220839a4d0/maintainability)](https://codeclimate.com/github/ReefNetwork/ReefServer/maintainability)
 
