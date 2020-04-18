@@ -5,6 +5,7 @@ import net.ree_jp.reefseichi.data.User
 import org.sqlite.SQLiteException
 import java.sql.Connection
 import java.sql.DriverManager
+import java.sql.ResultSet
 
 class ReefHelper(path: String) : IReefHelper {
 
@@ -50,37 +51,25 @@ class ReefHelper(path: String) : IReefHelper {
 
         val stmt = connection.prepareStatement("SELECT * FROM user WHERE xuid = ?")
         stmt.setString(1, xuid)
-        val result = stmt.executeQuery()
-        val address: List<String> = result.getString("address").split(",")
-        val deviceId: List<String> = result.getString("deviceId").split(",")
-        return User.createResult(xuid, result.getString("name"), address, deviceId)
+        return toUser(stmt.executeQuery())
     }
 
     override fun getUserByName(name: String): User {
         val stmt = connection.prepareStatement("SELECT * FROM user WHERE name = ?")
         stmt.setString(1, name)
-        val result = stmt.executeQuery()
-        val address: List<String> = result.getString("address").split(",")
-        val deviceId: List<String> = result.getString("deviceId").split(",")
-        return User.createResult(result.getString("xuid"), name, address, deviceId)
+        return toUser(stmt.executeQuery())
     }
 
     override fun getUserByAddress(address: String): User {
         val stmt = connection.prepareStatement("SELECT * FROM user WHERE address = ?")
         stmt.setString(1, "%$address%")
-        val result = stmt.executeQuery()
-        val addressList: List<String> = result.getString("address").split(",")
-        val deviceIdList: List<String> = result.getString("deviceId").split(",")
-        return User.createResult(result.getString("xuid"), result.getString("name"), addressList, deviceIdList)
+        return toUser(stmt.executeQuery())
     }
 
     override fun getUserByDevice(deviceId: String): User {
         val stmt = connection.prepareStatement("SELECT * FROM user WHERE deviceId = ?")
         stmt.setString(1, "%$deviceId%")
-        val result = stmt.executeQuery()
-        val addressList: List<String> = result.getString("address").split(",")
-        val deviceIdList: List<String> = result.getString("deviceId").split(",")
-        return User.createResult(result.getString("xuid"), result.getString("name"), addressList, deviceIdList)
+        return toUser(stmt.executeQuery())
     }
 
     override fun setUser(xuid: String, name: String, address: List<String>, deviceId: List<String>) {
@@ -104,5 +93,11 @@ class ReefHelper(path: String) : IReefHelper {
         } catch (ex: SQLiteException) {
             throw ex
         }
+    }
+
+    private fun toUser(result: ResultSet): User{
+        val addressList: List<String> = result.getString("address").split(",")
+        val deviceIdList: List<String> = result.getString("deviceId").split(",")
+        return User.createResult(result.getString("xuid"), result.getString("name"), addressList, deviceIdList)
     }
 }
