@@ -3,9 +3,7 @@ package net.ree_jp.reefseichi.sqlite
 import net.ree_jp.reefseichi.ReefSeichiPlugin
 import net.ree_jp.reefseichi.data.User
 import org.sqlite.SQLiteException
-import java.sql.Connection
-import java.sql.DriverManager
-import java.sql.ResultSet
+import java.sql.*
 
 class ReefHelper(path: String) : IReefHelper {
 
@@ -75,21 +73,21 @@ class ReefHelper(path: String) : IReefHelper {
     override fun setUser(xuid: String, name: String, address: List<String>, deviceId: List<String>) {
 
         try {
+            val stmt: PreparedStatement
             if (isExistsUser(xuid)) {
-                val stmt = connection.prepareStatement("UPDATE user SET name = ?, address = ?, deviceId = ? WHERE xuid = ?")
+                stmt = connection.prepareStatement("UPDATE user SET name = ?, address = ?, deviceId = ? WHERE xuid = ?")
                 stmt.setString(1, name)
                 stmt.setString(2, address.joinToString(","))
                 stmt.setString(3, deviceId.joinToString(","))
                 stmt.setString(4, xuid)
-                stmt.executeUpdate()
             } else {
-                val stmt = connection.prepareStatement("INSERT INTO user VALUES (?, ?, ?, ?)")
+                stmt = connection.prepareStatement("INSERT INTO user VALUES (?, ?, ?, ?)")
                 stmt.setString(1, xuid)
                 stmt.setString(2, name)
                 stmt.setString(3, address.joinToString(","))
                 stmt.setString(4, deviceId.joinToString(","))
-                stmt.executeUpdate()
             }
+            stmt.execute()
         } catch (ex: SQLiteException) {
             throw ex
         }
