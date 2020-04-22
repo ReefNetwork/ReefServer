@@ -9,12 +9,7 @@
  * Copyright (c) 2020. Ree-jp.  All Rights Reserved.
  */
 
-package net.ree_jp.reefseichi.data
+package net.ree_jp.reefseichi.event
 
-interface IUser {
-
-    val xuid: String
-    val name: String
-    val address: List<String>
-    val deviceId: List<String>
+class SeichiListener {
 }

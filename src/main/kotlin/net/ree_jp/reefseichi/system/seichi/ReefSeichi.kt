@@ -9,21 +9,19 @@
  * Copyright (c) 2020. Ree-jp.  All Rights Reserved.
  */
 
-package net.ree_jp.reefseichi.system.ban
+package net.ree_jp.reefseichi.system.seichi
 
 import net.ree_jp.reefseichi.ReefSeichiPlugin
-import net.ree_jp.reefseichi.system.ban.sqlite.BanHelper
+import net.ree_jp.reefseichi.system.seichi.sqlite.SeichiHelper
 
-class ReefBan {
+class ReefSeichi {
 
     companion object{
+        private lateinit var helper: SeichiHelper
 
-        private lateinit var helper: BanHelper
-
-        fun getHelper(): BanHelper
-        {
+        fun getHelper(): SeichiHelper{
             if (!::helper.isInitialized) {
-                helper = BanHelper(ReefSeichiPlugin.getInstance().dataFolder.path)
+                helper = SeichiHelper(ReefSeichiPlugin.getInstance().dataFolder.path)
             }
             return helper
         }

@@ -1,3 +1,14 @@
+/*
+ * RRRRRR                         jjj
+ * RR   RR   eee    eee               pp pp
+ * RRRRRR  ee   e ee   e _____    jjj ppp  pp
+ * RR  RR  eeeee  eeeee           jjj pppppp
+ * RR   RR  eeeee  eeeee          jjj pp
+ *                              jjjj  pp
+ *
+ * Copyright (c) 2020. Ree-jp.  All Rights Reserved.
+ */
+
 package net.ree_jp.reefseichi.system.seichi.data
 
 import cn.nukkit.Player
@@ -15,6 +26,7 @@ data class SeichiData(
 ) : ISeichiData, DataJson()
 
 data class Skill(
+    override val name: String,
     override val coolTime: Int,
     override val depth: Int,
     override val height: Int,

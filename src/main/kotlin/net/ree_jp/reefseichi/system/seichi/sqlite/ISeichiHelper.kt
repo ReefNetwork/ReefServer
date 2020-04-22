@@ -9,12 +9,15 @@
  * Copyright (c) 2020. Ree-jp.  All Rights Reserved.
  */
 
-package net.ree_jp.reefseichi.data
+package net.ree_jp.reefseichi.system.seichi.sqlite
 
-interface IUser {
+import net.ree_jp.reefseichi.system.seichi.data.SeichiData
 
-    val xuid: String
-    val name: String
-    val address: List<String>
-    val deviceId: List<String>
+interface ISeichiHelper {
+
+    fun isExists(xuid: String): Boolean
+
+    fun getData(xuid: String): SeichiData
+
+    fun setData(xuid: String, seichiData: SeichiData)
 }
