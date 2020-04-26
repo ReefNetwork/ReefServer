@@ -34,8 +34,8 @@ repositories {
 dependencies {
     compileOnly("com.github.bbo51dog:Ecokkit:1.0.1")
     testCompileOnly("com.github.bbo51dog:Ecokkit:1.0.1")
-    compileOnly("com.github.Creeperface01:ScoreboardAPI:1.0")
-    testCompileOnly("com.github.Creeperface01:ScoreboardAPI:1.0")
+    compileOnly("com.github.Creeperface01:ScoreboardAPI:master")
+    testCompileOnly("com.github.Creeperface01:ScoreboardAPI:master")
     compileOnly("cn.nukkit:nukkit:1.0-SNAPSHOT")
     testCompileOnly("cn.nukkit:nukkit:1.0-SNAPSHOT")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
