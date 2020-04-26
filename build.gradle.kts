@@ -1,3 +1,14 @@
+/*
+ * RRRRRR                         jjj
+ * RR   RR   eee    eee               pp pp
+ * RRRRRR  ee   e ee   e _____    jjj ppp  pp
+ * RR  RR  eeeee  eeeee           jjj pppppp
+ * RR   RR  eeeee  eeeee          jjj pp
+ *                              jjjj  pp
+ *
+ * Copyright (c) 2020. Ree-jp.  All Rights Reserved.
+ */
+
 plugins {
     java
     maven
@@ -23,14 +34,14 @@ repositories {
 dependencies {
     compileOnly("com.github.bbo51dog:Ecokkit:1.0.1")
     testCompileOnly("com.github.bbo51dog:Ecokkit:1.0.1")
-    compileOnly("com.github.Creeperface01:ScoreboardAPI:Tag")
-    testCompileOnly("com.github.Creeperface01:ScoreboardAPI:Tag")
+    compileOnly("com.github.Creeperface01:ScoreboardAPI:1.0")
+    testCompileOnly("com.github.Creeperface01:ScoreboardAPI:1.0")
     compileOnly("cn.nukkit:nukkit:1.0-SNAPSHOT")
     testCompileOnly("cn.nukkit:nukkit:1.0-SNAPSHOT")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.xerial:sqlite-jdbc:3.30.1")
-    implementation ("com.github.Tea-Ayataka:Kordis:0.2.3")
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5")
+    implementation("com.github.Tea-Ayataka:Kordis:0.2.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5")
     implementation("com.google.code.gson:gson:2.8.6")
 }
 
