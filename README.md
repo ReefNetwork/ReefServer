@@ -7,8 +7,8 @@
 [![discord](https://discordapp.com/api/guilds/638760361369010177/widget.png?style=banner2)]( https://discord.gg/M4A6cak)
 
 # Download
-[core](https://gitlab.com/Ree-jp/ReefSeichi/-/jobs/artifacts/dev/raw/build/libs/ReefSeichi-1.0-SNAPSHOT-all.jar?job=build_job_1)  
-[![pipeline status](https://gitlab.com/Ree-jp/ReefServer/badges/dev/pipeline.svg)](https://gitlab.com/Ree-jp/ReefSeichi/-/commits/dev)
+[core](https://gitlab.com/Ree-jp/ReefServer/-/jobs/artifacts/dev/raw/build/libs/ReefSeichi-1.0-SNAPSHOT-all.jar?job=build_job_1)  
+[![pipeline status](https://gitlab.com/Ree-jp/ReefServer/badges/dev/pipeline.svg)](https://gitlab.com/Ree-jp/ReefServer/-/commits/dev)
 
 [AutoUpdate](https://gitlab.com/Ree-jp/ReefAutoUpdate/-/jobs/artifacts/master/raw/build/libs/ReefAutoUpdate-1.0-SNAPSHOT-all.jar?job=build_job_1)  
 [![pipeline status](https://gitlab.com/Ree-jp/ReefAutoUpdate/badges/dev/pipeline.svg)](https://gitlab.com/Ree-jp/ReefAutoUpdate/-/commits/dev)
