@@ -15,7 +15,7 @@
 
 # Required plugin
 [Ecokkit](https://github.com/bbo51dog/Ecokkit)  
-[ScoreBoardAPI](https://github.com/Creeperface01/ScoreboardAPI)
+[ScoreBoardAPI](https://github.com/Creeperface01/ScoreboardAPI)  
 StackStorage_nukkit
 
 # Library
