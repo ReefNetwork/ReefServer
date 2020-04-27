@@ -18,11 +18,11 @@ import net.ree_jp.reefseichi.data.DataJson
 
 data class SeichiData(
     override val xuid: String,
-    override val skill: Skill,
-    override val skills: List<Skill>,
-    override val level: Int,
-    override val mana: Int,
-    override val xp: Int
+    override var skill: Skill,
+    override var skills: List<Skill>,
+    override var level: Int,
+    override var xp: Int,
+    override var mana: Int
 ) : ISeichiData, DataJson()
 
 data class Skill(

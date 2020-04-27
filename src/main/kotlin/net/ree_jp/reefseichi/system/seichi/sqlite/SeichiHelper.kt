@@ -12,7 +12,9 @@
 package net.ree_jp.reefseichi.system.seichi.sqlite
 
 import com.google.gson.Gson
+import com.google.gson.JsonArray
 import net.ree_jp.reefseichi.system.seichi.data.SeichiData
+import net.ree_jp.reefseichi.system.seichi.data.Skill
 import org.sqlite.SQLiteException
 import java.sql.Connection
 import java.sql.DriverManager
@@ -25,6 +27,7 @@ class SeichiHelper(path: String): ISeichiHelper {
         try {
             Class.forName("org.sqlite.JDBC")
             connection = DriverManager.getConnection("jdbc:sqlite:$path/customMessage.db")
+            createTable()
         } catch (ex: SQLiteException) {
             throw ex
         }
@@ -39,20 +42,46 @@ class SeichiHelper(path: String): ISeichiHelper {
     override fun getData(xuid: String): SeichiData {
         if (!isExists(xuid)) throw Exception("data not found")
 
-        val stmt = connection.prepareStatement("SELECT data FROM seichi WHERE xuid = ?")
+        val stmt = connection.prepareStatement("SELECT * FROM seichi WHERE xuid = ?")
         stmt.setString(1, xuid)
-        val json = stmt.executeQuery().getString("data")
-        return Gson().fromJson(json, SeichiData::class.java)
+        val result = stmt.executeQuery()
+        val jsonSkill = result.getString("skill")
+        val jsonSKills = result.getString("skills").split(",")
+        val skills = mutableListOf<Skill>()
+        for (skill in jsonSKills) {
+            skills.add(getSKill(skill))
+        }
+        return SeichiData(
+            xuid,
+            getSKill(jsonSkill),
+            skills,
+            result.getInt("level"),
+            result.getInt("xp"),
+            result.getInt("mana")
+        )
     }
 
     override fun setData(xuid: String, seichiData: SeichiData) {
-        val stmt = connection.prepareStatement("REPLACE INTO seichi VALUES (?, ?)")
+        val jsonSkills = JsonArray()
+        for (skill in seichiData.skills) {
+            jsonSkills.add(skill.toJson())
+        }
+        val stmt = connection.prepareStatement("REPLACE INTO seichi VALUES (?, ?, ?, ?, ?, ?)")
         stmt.setString(1, xuid)
-        stmt.setString(2, seichiData.toJson())
+        stmt.setString(2, seichiData.skill.toJson())
+        stmt.setString(3, jsonSkills.joinToString(","))
+        stmt.setInt(4, seichiData.level)
+        stmt.setInt(5, seichiData.xp)
+        stmt.setInt(6, seichiData.mana)
         stmt.execute()
     }
 
-    private fun createTable(){
-        connection.createStatement().execute("CREATE TABLE IF NOT EXISTS seichi(xuid TEXT NOT NULL PRIMARY KEY ,data TEXT NOT NULL)")
+    private fun createTable() {
+        connection.createStatement()
+            .execute("CREATE TABLE IF NOT EXISTS seichi(xuid TEXT NOT NULL PRIMARY KEY ,skill TEXT NOT NULL ,skills TEXT NOT NULL ,level INTEGER NOT NULL ,xp INTEGER NOT NULL ,mana INTEGER NOT NULL )")
+    }
+
+    private fun getSKill(json: String): Skill {
+        return Gson().fromJson(json, Skill::class.java)
     }
 }
