@@ -9,7 +9,7 @@
  * Copyright (c) 2020. Ree-jp.  All Rights Reserved.
  */
 
-package net.ree_jp.reefseichi.event
+package net.ree_jp.reefseichi.system.discord.event
 
 import cn.nukkit.Server
 import cn.nukkit.utils.TextFormat

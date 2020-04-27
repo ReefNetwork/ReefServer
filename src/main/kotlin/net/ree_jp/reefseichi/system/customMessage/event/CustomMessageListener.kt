@@ -9,7 +9,7 @@
  * Copyright (c) 2020. Ree-jp.  All Rights Reserved.
  */
 
-package net.ree_jp.reefseichi.event
+package net.ree_jp.reefseichi.system.customMessage.event
 
 import cn.nukkit.event.EventHandler
 import cn.nukkit.event.Listener

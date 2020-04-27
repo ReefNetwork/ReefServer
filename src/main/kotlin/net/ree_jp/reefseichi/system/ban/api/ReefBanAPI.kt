@@ -9,7 +9,7 @@
  * Copyright (c) 2020. Ree-jp.  All Rights Reserved.
  */
 
-package net.ree_jp.reefseichi.api.ban
+package net.ree_jp.reefseichi.system.ban.api
 
 import net.ree_jp.reefseichi.api.ReefAPI
 import net.ree_jp.reefseichi.system.ban.ReefBan
@@ -22,8 +22,9 @@ class ReefBanAPI(private val helper: BanHelper) : IReefBanAPI {
         private lateinit var instance: ReefBanAPI
 
         fun getInstance(): ReefBanAPI {
-            if (!::instance.isInitialized) {
-                instance = ReefBanAPI(ReefBan.getHelper())
+            if (!Companion::instance.isInitialized) {
+                instance =
+                    ReefBanAPI(ReefBan.getHelper())
             }
             return instance
         }

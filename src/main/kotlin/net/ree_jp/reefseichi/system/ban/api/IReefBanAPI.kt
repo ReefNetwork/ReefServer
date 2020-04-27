@@ -9,7 +9,7 @@
  * Copyright (c) 2020. Ree-jp.  All Rights Reserved.
  */
 
-package net.ree_jp.reefseichi.api.ban
+package net.ree_jp.reefseichi.system.ban.api
 
 interface IReefBanAPI {
 

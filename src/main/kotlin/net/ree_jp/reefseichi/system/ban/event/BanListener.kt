@@ -9,12 +9,12 @@
  * Copyright (c) 2020. Ree-jp.  All Rights Reserved.
  */
 
-package net.ree_jp.reefseichi.event
+package net.ree_jp.reefseichi.system.ban.event
 
 import cn.nukkit.event.EventHandler
 import cn.nukkit.event.Listener
 import cn.nukkit.event.player.PlayerPreLoginEvent
-import net.ree_jp.reefseichi.api.ban.ReefBanAPI
+import net.ree_jp.reefseichi.system.ban.api.ReefBanAPI
 import net.ree_jp.reefseichi.system.ban.ReefBan
 
 class BanListener : Listener {

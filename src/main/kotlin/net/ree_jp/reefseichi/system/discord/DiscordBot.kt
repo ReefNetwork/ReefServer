@@ -16,7 +16,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import net.ayataka.kordis.DiscordClient
 import net.ayataka.kordis.entity.server.channel.text.ServerTextChannel
-import net.ree_jp.reefseichi.event.DiscordListener
+import net.ree_jp.reefseichi.system.discord.event.DiscordListener
 
 class DiscordBot(private val client: DiscordClient) {
 
