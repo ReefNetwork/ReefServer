@@ -20,18 +20,22 @@ data class SeichiData(
     override val xuid: String,
     override var skill: Skill,
     override var skills: List<Skill>,
-    override var level: Int,
     override var xp: Int,
     override var mana: Int
 ) : ISeichiData, DataJson()
 
 data class Skill(
     override val name: String,
+    override val mana: Int,
     override val coolTime: Int,
     override val depth: Int,
     override val height: Int,
     override val wight: Int
 ) : ISkill, DataJson() {
+
+    override var isCool: Boolean
+        get() = false
+        set(value) {}
 
     override fun skillRange(vec3: Vector3, p: Player): List<Vector3> {
         val result = mutableListOf<Vector3>()

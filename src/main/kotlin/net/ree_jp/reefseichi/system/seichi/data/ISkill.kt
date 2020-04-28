@@ -16,10 +16,11 @@ import cn.nukkit.math.Vector3
 
 interface ISkill {
 
+    var isCool: Boolean
+
     val name: String
 
-    val isCool: Boolean
-        get() = false
+    val mana: Int
 
     val coolTime: Int
 

@@ -21,7 +21,5 @@ interface ISeichiData {
 
     val mana: Int
 
-    val level: Int
-
     val xp: Int
 }
