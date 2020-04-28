@@ -13,15 +13,18 @@ package net.ree_jp.reefseichi.system.seichi.sqlite
 
 import com.google.gson.Gson
 import com.google.gson.JsonArray
+import net.ree_jp.reefseichi.system.seichi.ReefSeichi
 import net.ree_jp.reefseichi.system.seichi.data.SeichiData
 import net.ree_jp.reefseichi.system.seichi.data.Skill
 import org.sqlite.SQLiteException
 import java.sql.Connection
 import java.sql.DriverManager
 
-class SeichiHelper(path: String): ISeichiHelper {
+class SeichiHelper(path: String) : ISeichiHelper {
 
-    private var connection: Connection
+    private val connection: Connection
+
+    private val data = mutableMapOf<String, SeichiData>()
 
     init {
         try {
@@ -40,7 +43,22 @@ class SeichiHelper(path: String): ISeichiHelper {
     }
 
     override fun getData(xuid: String): SeichiData {
-        if (!isExists(xuid)) throw Exception("data not found")
+        return data[xuid] ?: read(xuid)
+    }
+
+    override fun setData(xuid: String, seichiData: SeichiData) {
+        data[xuid] = seichiData
+    }
+
+    override fun save() {
+        for (seichiData in data) {
+            write(seichiData.value)
+        }
+        data.clear()
+    }
+
+    private fun read(xuid: String): SeichiData {
+        if (!isExists(xuid)) write(ReefSeichi.getInstance().getDefault(xuid))
 
         val stmt = connection.prepareStatement("SELECT * FROM seichi WHERE xuid = ?")
         stmt.setString(1, xuid)
@@ -61,13 +79,13 @@ class SeichiHelper(path: String): ISeichiHelper {
         )
     }
 
-    override fun setData(xuid: String, seichiData: SeichiData) {
+    private fun write(seichiData: SeichiData) {
         val jsonSkills = JsonArray()
         for (skill in seichiData.skills) {
             jsonSkills.add(skill.toJson())
         }
         val stmt = connection.prepareStatement("REPLACE INTO seichi VALUES (?, ?, ?, ?, ?, ?)")
-        stmt.setString(1, xuid)
+        stmt.setString(1, seichiData.xuid)
         stmt.setString(2, seichiData.skill.toJson())
         stmt.setString(3, jsonSkills.joinToString(","))
         stmt.setInt(4, seichiData.level)
