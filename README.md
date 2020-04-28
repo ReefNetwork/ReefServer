@@ -16,7 +16,7 @@
 # Required plugin
 [Ecokkit](https://github.com/bbo51dog/Ecokkit)  
 [ScoreBoardAPI](https://github.com/Creeperface01/ScoreboardAPI)  
-StackStorage_nukkit
+StackStorage_nukkit 
 
 # Library
 [Kordis](https://github.com/Tea-Ayataka/Kordis)  
