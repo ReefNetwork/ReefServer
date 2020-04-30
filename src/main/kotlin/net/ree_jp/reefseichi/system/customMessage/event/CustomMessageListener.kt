@@ -29,7 +29,7 @@ class CustomMessageListener : Listener {
         val helper = ReefCustomMessage.getHelper()
         val key = ReefCustomMessage.DISPLAY_NAME_TAG_KEY
 
-        p.displayName = "[${helper.getMessage(xuid, key)}] $n"
+        p.displayName = "[${helper.getValue(xuid, key, String::class.java)}] $n"
     }
 
     @EventHandler
@@ -42,10 +42,16 @@ class CustomMessageListener : Listener {
         val rejoinKey = ReefCustomMessage.REJOIN_KEY
 
         if (isRejoin(xuid)) {
-            if (helper.isExistsKey(xuid, rejoinKey)) ev.setJoinMessage(helper.getMessage(xuid, rejoinKey)) else ev.setJoinMessage("$n さんが再参加しました")
+            if (helper.isExistsKey(xuid, rejoinKey)) ev.setJoinMessage(
+                helper.getValue(
+                    xuid,
+                    rejoinKey,
+                    String::class.java
+                )
+            ) else ev.setJoinMessage("$n さんが再参加しました")
         } else {
             if (helper.isExistsKey(xuid, joinKey)) {
-                ev.setJoinMessage(helper.getMessage(xuid, joinKey))
+                ev.setJoinMessage(helper.getValue(xuid, joinKey, String::class.java))
             } else if (p.firstPlayed == null) ev.setJoinMessage("$n さんが初参加しました") else ev.setJoinMessage("$n さんが参加しました")
         }
     }
@@ -60,7 +66,7 @@ class CustomMessageListener : Listener {
         val key = ReefCustomMessage.QUIT_KEY
 
         if (helper.isExistsKey(xuid, key)) {
-            ev.setQuitMessage(helper.getMessage(xuid, key))
+            ev.setQuitMessage(helper.getValue(xuid, key, String::class.java))
         } else ev.setQuitMessage("$n さんが $reason でログアウトしました")
     }
 
