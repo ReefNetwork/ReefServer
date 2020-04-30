@@ -1,8 +1,8 @@
-move build\libs\ReefSeichi-1.0-SNAPSHOT-all.jar D:\DockerNukkit\Nukkit\data\plugins
-cd D:\DockerNukkit\Nukkit\data
+move build\libs\ReefSeichi-1.0-SNAPSHOT-all.jar D:\code\nukkitPlugin\Nukkit\data\plugins
+cd D:\code\nukkitPlugin\Nukkit\data\plugins
 @color 0a
 @echo StartingServer...
-java -jar Nukkit-1.0-SNAPSHOT.jar
+docker-compose start
 @color 00
 @echo Initializing...
 @cd D:\code\nukkitPlugin\ReefSeichi
