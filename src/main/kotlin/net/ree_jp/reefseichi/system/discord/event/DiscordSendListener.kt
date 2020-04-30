@@ -12,37 +12,51 @@
 package net.ree_jp.reefseichi.system.discord.event
 
 import cn.nukkit.event.EventHandler
+import cn.nukkit.event.EventPriority
 import cn.nukkit.event.Listener
 import cn.nukkit.event.player.PlayerChatEvent
 import cn.nukkit.event.player.PlayerJoinEvent
 import cn.nukkit.event.player.PlayerQuitEvent
+import net.ree_jp.reefseichi.ReefNotice
 import net.ree_jp.reefseichi.system.discord.ReefDiscord
 
 class DiscordSendListener : Listener {
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR)
     fun joinForSendDiscord(ev: PlayerJoinEvent) {
         val p = ev.player
         val n = p.name
 
-        ReefDiscord.getBot().sendMessage("$n さんがログインしました")
+        try {
+            ReefDiscord.getBot().sendMessage("$n さんがログインしました")
+        } catch (ex: Exception) {
+            p.sendMessage("${ReefNotice.ERROR}${ex.message}")
+        }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR)
     fun quitForSendDiscord(ev: PlayerQuitEvent) {
         val p = ev.player
         val n = p.name
         val reason = ev.reason
 
-        ReefDiscord.getBot().sendMessage("$n さんが$reason でログアウトしました")
+        try {
+            ReefDiscord.getBot().sendMessage("$n さんが$reason でログアウトしました")
+        } catch (ex: Exception) {
+            p.sendMessage("${ReefNotice.ERROR}${ex.message}")
+        }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR)
     fun chatForSendDiscord(ev: PlayerChatEvent) {
         val p = ev.player
         val n = p.name
         val message = ev.message
 
-        ReefDiscord.getBot().sendMessage("[$n] `$message`")
+        try {
+            ReefDiscord.getBot().sendMessage("[$n] `$message`")
+        } catch (ex: Exception) {
+            p.sendMessage("${ReefNotice.ERROR}${ex.message}")
+        }
     }
 }
