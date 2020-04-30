@@ -30,4 +30,4 @@ jobs:
         uses: actions/upload-artifact@v1.0.0
         with:
           name: ReefSeichi
-          path: build/libs
+          path: build/libs/ReefSeichi-1.0-SNAPSHOT-all.java
