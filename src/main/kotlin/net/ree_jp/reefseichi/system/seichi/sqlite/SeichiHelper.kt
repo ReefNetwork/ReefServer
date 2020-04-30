@@ -73,7 +73,6 @@ class SeichiHelper(path: String) : ISeichiHelper {
             xuid,
             getSKill(jsonSkill),
             skills,
-            result.getInt("level"),
             result.getInt("xp"),
             result.getInt("mana")
         )
@@ -88,15 +87,14 @@ class SeichiHelper(path: String) : ISeichiHelper {
         stmt.setString(1, seichiData.xuid)
         stmt.setString(2, seichiData.skill.toJson())
         stmt.setString(3, jsonSkills.joinToString(","))
-        stmt.setInt(4, seichiData.level)
-        stmt.setInt(5, seichiData.xp)
-        stmt.setInt(6, seichiData.mana)
+        stmt.setInt(4, seichiData.xp)
+        stmt.setInt(5, seichiData.mana)
         stmt.execute()
     }
 
     private fun createTable() {
         connection.createStatement()
-            .execute("CREATE TABLE IF NOT EXISTS seichi(xuid TEXT NOT NULL PRIMARY KEY ,skill TEXT NOT NULL ,skills TEXT NOT NULL ,level INTEGER NOT NULL ,xp INTEGER NOT NULL ,mana INTEGER NOT NULL )")
+            .execute("CREATE TABLE IF NOT EXISTS seichi(xuid TEXT NOT NULL PRIMARY KEY ,skill TEXT NOT NULL ,skills TEXT NOT NULL ,xp INTEGER NOT NULL ,mana INTEGER NOT NULL )")
     }
 
     private fun getSKill(json: String): Skill {

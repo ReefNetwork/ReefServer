@@ -13,9 +13,9 @@ package net.ree_jp.reefseichi
 
 import cn.nukkit.plugin.PluginBase
 import cn.nukkit.utils.TextFormat
-import net.ree_jp.reefseichi.event.BanListener
-import net.ree_jp.reefseichi.event.CustomMessageListener
-import net.ree_jp.reefseichi.event.DiscordSendListener
+import net.ree_jp.reefseichi.system.ban.event.BanListener
+import net.ree_jp.reefseichi.system.customMessage.event.CustomMessageListener
+import net.ree_jp.reefseichi.system.discord.event.DiscordSendListener
 import net.ree_jp.reefseichi.event.EventListener
 import net.ree_jp.reefseichi.system.discord.ReefDiscord
 

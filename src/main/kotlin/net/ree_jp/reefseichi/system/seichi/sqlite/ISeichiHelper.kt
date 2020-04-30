@@ -20,4 +20,6 @@ interface ISeichiHelper {
     fun getData(xuid: String): SeichiData
 
     fun setData(xuid: String, seichiData: SeichiData)
+
+    fun save()
 }
