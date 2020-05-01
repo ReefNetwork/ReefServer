@@ -11,8 +11,10 @@
 
 package net.ree_jp.reefseichi.system.seichi
 
+import cn.nukkit.Server
 import net.ree_jp.reefseichi.ReefSeichiPlugin
 import net.ree_jp.reefseichi.system.seichi.api.SeichiAPI
+import net.ree_jp.reefseichi.system.seichi.api.SeichiStatusAPI
 import net.ree_jp.reefseichi.system.seichi.data.SeichiData
 import net.ree_jp.reefseichi.system.seichi.data.Skill
 import net.ree_jp.reefseichi.system.seichi.sqlite.SeichiHelper
@@ -33,6 +35,8 @@ class ReefSeichi {
 
     private lateinit var api: SeichiAPI
 
+    private lateinit var statusApi: SeichiStatusAPI
+
     private lateinit var helper: SeichiHelper
 
     fun getAPI(): SeichiAPI {
@@ -40,6 +44,18 @@ class ReefSeichi {
             api = SeichiAPI(getHelper())
         }
         return api
+    }
+
+    fun getStatusAPI(): SeichiStatusAPI {
+        if (!::statusApi.isInitialized) {
+            statusApi = SeichiStatusAPI()
+            Server.getInstance().scheduler.scheduleDelayedRepeatingTask(
+                { statusApi.showStatusAll() },
+                20,
+                Int.MAX_VALUE
+            )
+        }
+        return statusApi
     }
 
     fun getHelper(): SeichiHelper {
@@ -50,7 +66,12 @@ class ReefSeichi {
     }
 
     fun getLevel(xp: Int): Int {
+        return 0
         TODO()
+    }
+
+    fun getNextLevel(xp: Int): Int {
+        return 0
     }
 
     fun getDefault(xuid: String): SeichiData {
