@@ -8,7 +8,7 @@
 
 # Download
 [core](https://gitlab.com/Ree-jp/ReefServer/-/jobs/artifacts/dev/raw/build/libs/ReefSeichi-1.0-SNAPSHOT-all.jar?job=build_job_1)  
-[![pipeline status](https://gitlab.com/Ree-jp/ReefServer/badges/dev/pipeline.svg)](https://gitlab.com/Ree-jp/ReefServer/-/commits/dev)
+[![CI](https://github.com/ReefNetwork/ReefServer/workflows/CI/badge.svg)](https://github.com/ReefNetwork/ReefServer/actions?query=workflow%3ACI)
 
 [AutoUpdate](https://gitlab.com/Ree-jp/ReefAutoUpdate/-/jobs/artifacts/master/raw/build/libs/ReefAutoUpdate-1.0-SNAPSHOT-all.jar?job=build_job_1)  
 [![pipeline status](https://gitlab.com/Ree-jp/ReefAutoUpdate/badges/dev/pipeline.svg)](https://gitlab.com/Ree-jp/ReefAutoUpdate/-/commits/dev)
