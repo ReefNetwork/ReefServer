@@ -12,7 +12,6 @@
 package net.ree_jp.reefseichi.system.seichi.event
 
 import cn.nukkit.event.EventHandler
-import cn.nukkit.event.EventPriority
 import cn.nukkit.event.Listener
 import cn.nukkit.event.player.PlayerJoinEvent
 import cn.nukkit.utils.TextFormat
