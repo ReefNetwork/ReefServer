@@ -11,7 +11,10 @@
 
 package net.ree_jp.reefseichi.system.customMessage
 
+import cn.nukkit.Server
+import cn.nukkit.plugin.PluginBase
 import net.ree_jp.reefseichi.ReefSeichiPlugin
+import net.ree_jp.reefseichi.system.customMessage.event.CustomMessageListener
 import net.ree_jp.reefseichi.system.customMessage.sqlite.CustomMessageHelper
 
 class ReefCustomMessage {
@@ -26,12 +29,17 @@ class ReefCustomMessage {
 
         private lateinit var instance: CustomMessageHelper
 
-        fun getHelper(): CustomMessageHelper
-        {
+        fun getHelper(): CustomMessageHelper {
             if (!::instance.isInitialized) {
                 instance = CustomMessageHelper(ReefSeichiPlugin.getInstance().dataFolder.path)
             }
             return instance
+        }
+
+        fun registerListener(plugin: PluginBase) {
+            val pm = Server.getInstance().pluginManager
+
+            pm.registerEvents(CustomMessageListener(), plugin)
         }
     }
 }

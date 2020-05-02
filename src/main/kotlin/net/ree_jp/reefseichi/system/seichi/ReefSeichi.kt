@@ -12,11 +12,14 @@
 package net.ree_jp.reefseichi.system.seichi
 
 import cn.nukkit.Server
+import cn.nukkit.plugin.PluginBase
 import net.ree_jp.reefseichi.ReefSeichiPlugin
 import net.ree_jp.reefseichi.system.seichi.api.SeichiAPI
 import net.ree_jp.reefseichi.system.seichi.api.SeichiStatusAPI
 import net.ree_jp.reefseichi.system.seichi.data.SeichiData
 import net.ree_jp.reefseichi.system.seichi.data.Skill
+import net.ree_jp.reefseichi.system.seichi.event.SeichiListener
+import net.ree_jp.reefseichi.system.seichi.event.SeichiStatusListener
 import net.ree_jp.reefseichi.system.seichi.sqlite.SeichiHelper
 
 class ReefSeichi {
@@ -30,6 +33,19 @@ class ReefSeichi {
                 instance = ReefSeichi()
             }
             return instance
+        }
+
+        fun registerListener(plugin: PluginBase) {
+            val pm = Server.getInstance().pluginManager
+
+            pm.registerEvents(SeichiListener(), plugin)
+            pm.registerEvents(SeichiStatusListener(), plugin)
+
+            Server.getInstance().scheduler.scheduleDelayedRepeatingTask(
+                { instance.getStatusAPI().showStatusAll() },
+                20,
+                Int.MAX_VALUE
+            )
         }
     }
 
@@ -49,11 +65,6 @@ class ReefSeichi {
     fun getStatusAPI(): SeichiStatusAPI {
         if (!::statusApi.isInitialized) {
             statusApi = SeichiStatusAPI()
-            Server.getInstance().scheduler.scheduleDelayedRepeatingTask(
-                { statusApi.showStatusAll() },
-                20,
-                Int.MAX_VALUE
-            )
         }
         return statusApi
     }

@@ -11,7 +11,10 @@
 
 package net.ree_jp.reefseichi.system.ban
 
+import cn.nukkit.Server
+import cn.nukkit.plugin.PluginBase
 import net.ree_jp.reefseichi.ReefSeichiPlugin
+import net.ree_jp.reefseichi.system.ban.event.BanListener
 import net.ree_jp.reefseichi.system.ban.sqlite.BanHelper
 
 class ReefBan {
@@ -20,12 +23,17 @@ class ReefBan {
 
         private lateinit var helper: BanHelper
 
-        fun getHelper(): BanHelper
-        {
+        fun getHelper(): BanHelper {
             if (!::helper.isInitialized) {
                 helper = BanHelper(ReefSeichiPlugin.getInstance().dataFolder.path)
             }
             return helper
+        }
+
+        fun registerListener(plugin: PluginBase) {
+            val pm = Server.getInstance().pluginManager
+
+            pm.registerEvents(BanListener(), plugin)
         }
     }
 }
