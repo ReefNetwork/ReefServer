@@ -18,7 +18,6 @@ import gt.creeperface.nukkit.scoreboardapi.ScoreboardAPI
 import net.ree_jp.reefseichi.ReefNotice
 import net.ree_jp.reefseichi.sqlite.MoreDataHelper
 import net.ree_jp.reefseichi.system.seichi.ReefSeichi
-import java.lang.Exception
 import java.time.LocalDateTime
 
 class SeichiStatusAPI {
@@ -57,7 +56,10 @@ class SeichiStatusAPI {
         val xuid = p.loginChainData.xuid
         val helper = MoreDataHelper.getInstance()
 
-        if (!type.containsKey(xuid)) type[xuid] = helper.getValue(xuid, STATUS_DATA_KEY, Int::class.java)
+        if (!type.containsKey(xuid)) {
+            if (!helper.isExistsKey(xuid, STATUS_DATA_KEY)) helper.setValue(xuid, STATUS_DATA_KEY, STATUS_NORMAL_MODE)
+            type[xuid] = helper.getValue(xuid, STATUS_DATA_KEY, Int::class.java)
+        }
 
         when (type.getValue(xuid)) {
             STATUS_NORMAL_MODE -> showNormal(p)
