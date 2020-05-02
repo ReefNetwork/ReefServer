@@ -17,7 +17,7 @@ class ReefNotice {
 
     companion object {
         val SUCCESS = "${TextFormat.GREEN}>> ${TextFormat.RESET} "
-        val PROCESSING = "${TextFormat.GREEN}>> ${TextFormat.RESET} "
-        val ERROR = "${TextFormat.GREEN}>> ${TextFormat.RESET} "
+        val PROCESSING = "${TextFormat.GRAY}>> ${TextFormat.RESET} "
+        val ERROR = "${TextFormat.RED}>> ${TextFormat.RESET} "
     }
 }
