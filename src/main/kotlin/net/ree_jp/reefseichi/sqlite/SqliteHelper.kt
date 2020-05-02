@@ -53,7 +53,7 @@ open class SqliteHelper(path: String) {
 
         val stmt = connection.prepareStatement("SELECT value FROM '$xuid' WHERE key = ?")
         stmt.setString(1, key)
-        return stmt.executeQuery().getObject("value", type.javaClass.newInstance())
+        return stmt.executeQuery().getObject("value", type)
     }
 
     fun <V> setValue(xuid: String, key: String, value: V) {
