@@ -32,7 +32,7 @@ class CustomMessageListener : Listener {
 
         try {
             if (!helper.isExistsKey(xuid, key)) helper.setValue(xuid, key, "初心者")
-            p.displayName = "[${helper.getValue(xuid, key, String::class.java)}] $n"
+            p.displayName = "[${helper.getValue(xuid, key)}] $n"
         } catch (ex: Exception) {
             p.sendMessage("${ReefNotice.ERROR}${ex.message}")
         }
@@ -49,16 +49,17 @@ class CustomMessageListener : Listener {
 
         try {
             if (isRejoin(xuid)) {
-                if (helper.isExistsKey(xuid, rejoinKey)) ev.setJoinMessage(
-                    helper.getValue(
-                        xuid,
-                        rejoinKey,
-                        String::class.java
+                if (helper.isExistsKey(xuid, rejoinKey))
+                    ev.setJoinMessage(
+                        helper.getValue(
+                            xuid,
+                            rejoinKey
+                        )
                     )
-                ) else ev.setJoinMessage("$n さんが再参加しました")
+                else ev.setJoinMessage("$n さんが再参加しました")
             } else {
                 if (helper.isExistsKey(xuid, joinKey)) {
-                    ev.setJoinMessage(helper.getValue(xuid, joinKey, String::class.java))
+                    ev.setJoinMessage(helper.getValue(xuid, joinKey))
                 } else if (p.firstPlayed == null) ev.setJoinMessage("$n さんが初参加しました") else ev.setJoinMessage("$n さんが参加しました")
             }
         } catch (ex: Exception) {
@@ -77,7 +78,7 @@ class CustomMessageListener : Listener {
 
         try {
             if (helper.isExistsKey(xuid, key)) {
-                ev.setQuitMessage(helper.getValue(xuid, key, String::class.java))
+                ev.setQuitMessage(helper.getValue(xuid, key))
             } else ev.setQuitMessage("$n さんが $reason でログアウトしました")
         } catch (ex: Exception) {
             p.sendMessage("${ReefNotice.ERROR}${ex.message}")

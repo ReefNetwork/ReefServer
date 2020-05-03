@@ -48,12 +48,12 @@ open class SqliteHelper(path: String) {
         return stmt.executeQuery().next()
     }
 
-    fun <T> getValue(xuid: String, key: String, type: Class<T>): T {
+    open fun getValue(xuid: String, key: String): Any {
         if (!isExistsKey(xuid, key)) throw Exception("data not found")
 
         val stmt = connection.prepareStatement("SELECT value FROM '$xuid' WHERE key = ?")
         stmt.setString(1, key)
-        return stmt.executeQuery().getObject("value", type)
+        return stmt.executeQuery().getObject("value")
     }
 
     fun <V> setValue(xuid: String, key: String, value: V) {
