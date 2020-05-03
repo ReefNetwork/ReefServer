@@ -37,7 +37,7 @@ open class SqliteHelper(path: String) {
         if (isExists(xuid)) return
 
         connection.createStatement()
-            .execute("CREATE TABLE IF NOT EXISTS '$xuid' (key TEXT NOT NULL PRIMARY KEY ,value NOT NULL)")
+            .execute("CREATE TABLE IF NOT EXISTS '$xuid' (key TEXT NOT NULL PRIMARY KEY ,value TEXT NOT NULL)")
     }
 
     fun isExistsKey(xuid: String, key: String): Boolean {
@@ -48,12 +48,12 @@ open class SqliteHelper(path: String) {
         return stmt.executeQuery().next()
     }
 
-    open fun getValue(xuid: String, key: String): Any {
+    fun getValue(xuid: String, key: String): String {
         if (!isExistsKey(xuid, key)) throw Exception("data not found")
 
         val stmt = connection.prepareStatement("SELECT value FROM '$xuid' WHERE key = ?")
         stmt.setString(1, key)
-        return stmt.executeQuery().getObject("value")
+        return stmt.executeQuery().getString("value")
     }
 
     fun <V> setValue(xuid: String, key: String, value: V) {

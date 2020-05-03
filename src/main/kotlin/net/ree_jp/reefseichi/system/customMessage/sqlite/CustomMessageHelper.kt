@@ -13,11 +13,4 @@ package net.ree_jp.reefseichi.system.customMessage.sqlite
 
 import net.ree_jp.reefseichi.sqlite.SqliteHelper
 
-class CustomMessageHelper(path: String) : SqliteHelper("$path/customMessage.db") {
-
-    override fun getValue(xuid: String, key: String): String {
-        val value = super.getValue(xuid, key)
-        if (value !is String) throw Exception("result value fraud")
-        return value
-    }
-}
+class CustomMessageHelper(path: String) : SqliteHelper("$path/customMessage.db")
