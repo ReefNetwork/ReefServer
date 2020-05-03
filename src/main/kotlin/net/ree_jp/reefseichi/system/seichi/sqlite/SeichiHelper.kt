@@ -64,7 +64,7 @@ class SeichiHelper(path: String) : ISeichiHelper {
         stmt.setString(1, xuid)
         val result = stmt.executeQuery()
         val jsonSkill = result.getString("skill")
-        val jsonSKills = result.getString("skills").split(",")
+        val jsonSKills = result.getString("skills").split("*separator*")
         val skills = mutableListOf<Skill>()
         for (skill in jsonSKills) {
             skills.add(getSKill(skill))
@@ -86,7 +86,7 @@ class SeichiHelper(path: String) : ISeichiHelper {
         val stmt = connection.prepareStatement("REPLACE INTO seichi VALUES (?, ?, ?, ?, ?)")
         stmt.setString(1, seichiData.xuid)
         stmt.setString(2, seichiData.skill.toJson())
-        stmt.setString(3, jsonSkills.joinToString(","))
+        stmt.setString(3, jsonSkills.joinToString("*separator*"))
         stmt.setInt(4, seichiData.xp)
         stmt.setInt(5, seichiData.mana)
         stmt.execute()
