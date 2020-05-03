@@ -4,4 +4,5 @@ cd D:\code\nukkitPlugin\Nukkit\data\plugins
 docker-compose up -d
 docker attach nukkit_coral_reef_1
 @echo Initializing...
+docker-compose down
 @cd D:\code\nukkitPlugin\ReefSeichi
