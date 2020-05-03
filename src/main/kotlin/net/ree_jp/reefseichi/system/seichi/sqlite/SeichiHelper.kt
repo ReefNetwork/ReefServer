@@ -79,7 +79,7 @@ class SeichiHelper(path: String) : ISeichiHelper {
     }
 
     private fun write(seichiData: SeichiData) {
-        val jsonSkills = JsonArray()
+        val jsonSkills = mutableListOf<String>()
         for (skill in seichiData.skills) {
             jsonSkills.add(skill.toJson())
         }
