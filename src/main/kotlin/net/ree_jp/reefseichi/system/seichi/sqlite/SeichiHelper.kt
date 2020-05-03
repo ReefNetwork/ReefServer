@@ -29,7 +29,7 @@ class SeichiHelper(path: String) : ISeichiHelper {
     init {
         try {
             Class.forName("org.sqlite.JDBC")
-            connection = DriverManager.getConnection("jdbc:sqlite:$path/customMessage.db")
+            connection = DriverManager.getConnection("jdbc:sqlite:$path/seichi.db")
             createTable()
         } catch (ex: SQLiteException) {
             throw ex
@@ -83,7 +83,7 @@ class SeichiHelper(path: String) : ISeichiHelper {
         for (skill in seichiData.skills) {
             jsonSkills.add(skill.toJson())
         }
-        val stmt = connection.prepareStatement("REPLACE INTO seichi VALUES (?, ?, ?, ?, ?, ?)")
+        val stmt = connection.prepareStatement("REPLACE INTO seichi VALUES (?, ?, ?, ?, ?)")
         stmt.setString(1, seichiData.xuid)
         stmt.setString(2, seichiData.skill.toJson())
         stmt.setString(3, jsonSkills.joinToString(","))
