@@ -21,18 +21,18 @@ class SeichiAPI(private val helper: SeichiHelper) {
 
     fun removeXp(xuid: String, xp: Int) {
         val rewrite = getXp(xuid) - xp
-        if (rewrite < 0) throw Exception("xp minus")
+        if (rewrite < 0) throw Exception("0以下にxpを設定することはできません")
         setXp(xuid, rewrite)
     }
 
     fun getXp(xuid: String): Int {
-        if (!helper.isExists(xuid)) throw Exception("player data not found")
+        if (!helper.isExists(xuid)) throw Exception("プレイヤーのデータが見つかりません")
 
         return helper.getData(xuid).xp
     }
 
     private fun setXp(xuid: String, xp: Int) {
-        if (!helper.isExists(xuid)) throw Exception("player data not found")
+        if (!helper.isExists(xuid)) throw Exception("プレイヤーのデータが見つかりません")
 
         val data = helper.getData(xuid)
         data.xp = xp

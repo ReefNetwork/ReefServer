@@ -88,7 +88,7 @@ data class Skill(
                 mz = (height - 1) / 2
             }
 
-            else -> throw Exception("direction error")
+            else -> throw Exception("不明な方角です")
         }
         for (x in sx..mx) {
             for (y in sy..my) {

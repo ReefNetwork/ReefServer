@@ -49,7 +49,7 @@ open class SqliteHelper(path: String) {
     }
 
     fun getValue(xuid: String, key: String): String {
-        if (!isExistsKey(xuid, key)) throw Exception("data not found")
+        if (!isExistsKey(xuid, key)) throw Exception("データが存在しません")
 
         val stmt = connection.prepareStatement("SELECT value FROM '$xuid' WHERE key = ?")
         stmt.setString(1, key)
