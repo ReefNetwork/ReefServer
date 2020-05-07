@@ -72,4 +72,13 @@ class LandData(
     fun getMaxEntity(): Int {
         TODO()
     }
+
+    fun isMember(xuid: String): Boolean {
+        if (owner == xuid) return true
+        for (user in subUser) {
+            if (user == xuid) return true
+        }
+
+        return false
+    }
 }
