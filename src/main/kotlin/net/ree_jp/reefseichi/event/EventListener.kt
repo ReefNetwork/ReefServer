@@ -19,7 +19,7 @@ import cn.nukkit.event.server.DataPacketReceiveEvent
 import cn.nukkit.network.protocol.SetLocalPlayerAsInitializedPacket
 import cn.nukkit.utils.TextFormat
 import net.ree_jp.reefseichi.ReefSeichiPlugin
-import net.ree_jp.reefseichi.sqlite.ReefHelper
+import net.ree_jp.reefseichi.sql.ReefHelper
 
 class EventListener : Listener {
 

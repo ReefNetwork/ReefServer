@@ -9,7 +9,7 @@
  * Copyright (c) 2020. Ree-jp.  All Rights Reserved.
  */
 
-package net.ree_jp.reefseichi.system.protect.sqlite
+package net.ree_jp.reefseichi.system.protect.sql
 
 import net.ree_jp.reefseichi.system.protect.data.LandData
 

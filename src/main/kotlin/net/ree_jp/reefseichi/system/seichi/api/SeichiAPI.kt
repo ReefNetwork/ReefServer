@@ -11,7 +11,7 @@
 
 package net.ree_jp.reefseichi.system.seichi.api
 
-import net.ree_jp.reefseichi.system.seichi.sqlite.SeichiHelper
+import net.ree_jp.reefseichi.system.seichi.sql.SeichiHelper
 
 class SeichiAPI(private val helper: SeichiHelper) {
 

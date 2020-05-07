@@ -9,7 +9,7 @@
  * Copyright (c) 2020. Ree-jp.  All Rights Reserved.
  */
 
-package net.ree_jp.reefseichi.system.ban.sqlite
+package net.ree_jp.reefseichi.system.ban.sql
 
 interface IBanHelper {
 

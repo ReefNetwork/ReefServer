@@ -15,7 +15,7 @@ import cn.nukkit.Server
 import cn.nukkit.plugin.PluginBase
 import net.ree_jp.reefseichi.ReefSeichiPlugin
 import net.ree_jp.reefseichi.system.ban.event.BanListener
-import net.ree_jp.reefseichi.system.ban.sqlite.BanHelper
+import net.ree_jp.reefseichi.system.ban.sql.BanHelper
 
 class ReefBan {
 

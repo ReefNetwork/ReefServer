@@ -20,7 +20,7 @@ import net.ree_jp.reefseichi.system.seichi.data.SeichiData
 import net.ree_jp.reefseichi.system.seichi.data.Skill
 import net.ree_jp.reefseichi.system.seichi.event.SeichiListener
 import net.ree_jp.reefseichi.system.seichi.event.SeichiStatusListener
-import net.ree_jp.reefseichi.system.seichi.sqlite.SeichiHelper
+import net.ree_jp.reefseichi.system.seichi.sql.SeichiHelper
 
 class ReefSeichi {
 
@@ -41,10 +41,10 @@ class ReefSeichi {
             pm.registerEvents(SeichiListener(), plugin)
             pm.registerEvents(SeichiStatusListener(), plugin)
 
-            Server.getInstance().scheduler.scheduleDelayedRepeatingTask(
-                { instance.getStatusAPI().showStatusAll() },
-                20,
-                Int.MAX_VALUE
+            Server.getInstance().scheduler.scheduleDelayedTask(
+                ReefSeichiPlugin.getInstance(),
+                { getInstance().getStatusAPI().showStatusAll() },
+                20
             )
         }
     }

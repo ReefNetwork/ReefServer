@@ -13,7 +13,7 @@ package net.ree_jp.reefseichi.system.ban.api
 
 import net.ree_jp.reefseichi.api.ReefAPI
 import net.ree_jp.reefseichi.system.ban.ReefBan
-import net.ree_jp.reefseichi.system.ban.sqlite.BanHelper
+import net.ree_jp.reefseichi.system.ban.sql.BanHelper
 
 class ReefBanAPI(private val helper: BanHelper) : IReefBanAPI {
 

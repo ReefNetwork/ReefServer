@@ -9,10 +9,9 @@
  * Copyright (c) 2020. Ree-jp.  All Rights Reserved.
  */
 
-package net.ree_jp.reefseichi.system.seichi.sqlite
+package net.ree_jp.reefseichi.system.seichi.sql
 
 import com.google.gson.Gson
-import com.google.gson.JsonArray
 import net.ree_jp.reefseichi.system.seichi.ReefSeichi
 import net.ree_jp.reefseichi.system.seichi.data.SeichiData
 import net.ree_jp.reefseichi.system.seichi.data.Skill

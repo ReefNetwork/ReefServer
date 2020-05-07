@@ -15,7 +15,7 @@ import cn.nukkit.Server
 import cn.nukkit.plugin.PluginBase
 import net.ree_jp.reefseichi.ReefSeichiPlugin
 import net.ree_jp.reefseichi.system.customMessage.event.CustomMessageListener
-import net.ree_jp.reefseichi.system.customMessage.sqlite.CustomMessageHelper
+import net.ree_jp.reefseichi.system.customMessage.sql.CustomMessageHelper
 
 class ReefCustomMessage {
 

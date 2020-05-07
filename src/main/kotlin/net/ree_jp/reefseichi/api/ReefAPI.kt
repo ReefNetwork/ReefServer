@@ -12,7 +12,7 @@
 package net.ree_jp.reefseichi.api
 
 import net.ree_jp.reefseichi.data.User
-import net.ree_jp.reefseichi.sqlite.ReefHelper
+import net.ree_jp.reefseichi.sql.ReefHelper
 
 class ReefAPI(private val helper: ReefHelper): IReefAPI {
 

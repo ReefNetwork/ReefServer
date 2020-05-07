@@ -9,7 +9,7 @@
  * Copyright (c) 2020. Ree-jp.  All Rights Reserved.
  */
 
-package net.ree_jp.reefseichi.sqlite
+package net.ree_jp.reefseichi.sql
 
 import net.ree_jp.reefseichi.ReefSeichiPlugin
 
