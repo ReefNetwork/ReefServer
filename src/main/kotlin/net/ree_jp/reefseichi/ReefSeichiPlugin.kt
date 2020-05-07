@@ -17,6 +17,7 @@ import net.ree_jp.reefseichi.event.EventListener
 import net.ree_jp.reefseichi.system.ban.ReefBan
 import net.ree_jp.reefseichi.system.customMessage.ReefCustomMessage
 import net.ree_jp.reefseichi.system.discord.ReefDiscord
+import net.ree_jp.reefseichi.system.protect.ReefProtect
 import net.ree_jp.reefseichi.system.seichi.ReefSeichi
 
 class ReefSeichiPlugin : PluginBase() {
@@ -57,7 +58,7 @@ class ReefSeichiPlugin : PluginBase() {
     }
 
     fun getKey(type: String): String {
-        if (!config.exists(type)) throw Exception("config key not found")
+        if (!config.exists(type)) throw Exception("キーがありません")
 
         return config.get(type, String())
     }
@@ -70,6 +71,7 @@ class ReefSeichiPlugin : PluginBase() {
         ReefCustomMessage.registerListener(this)
         ReefDiscord.registerListener(this)
         ReefSeichi.registerListener(this)
+        ReefProtect.registerListener(this)
 
         ReefDiscord.login()
     }
