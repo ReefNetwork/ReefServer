@@ -11,6 +11,7 @@
 
 package net.ree_jp.reefseichi.system.protect.data
 
+import cn.nukkit.level.Level
 import cn.nukkit.level.Position
 import cn.nukkit.math.AxisAlignedBB
 import cn.nukkit.math.Vector3
@@ -19,6 +20,7 @@ class LandData(
     private val min: Vector3,
     private val max: Vector3,
     private val owner: String,
+    val level: Level,
     var subUser: List<String>,
     var spawnPoint: Position,
     var canSkill: Boolean
