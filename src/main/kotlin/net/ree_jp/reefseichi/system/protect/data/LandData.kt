@@ -20,6 +20,7 @@ class LandData(
     private val min: Vector3,
     private val max: Vector3,
     private val owner: String,
+    val id: String,
     val level: Level,
     var subUser: List<String>,
     var spawnPoint: Position,
