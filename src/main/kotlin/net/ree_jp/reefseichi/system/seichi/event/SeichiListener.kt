@@ -33,6 +33,7 @@ class SeichiListener : Listener {
         val seichiData = seichi.getHelper().getData(xuid)
 
         try {
+            if (ev.isCancelled or !p.isSurvival) return
             api.addXp(xuid, 1)
 
             val skill = seichiData.skill
@@ -62,12 +63,11 @@ class SeichiListener : Listener {
         val p = ev.player
 
         try {
-            if (!ev.isCancelled) {
-                for (drop in ev.drops) {
-                    StackStoragePlugin.getInstance().getApi().addItem(p, drop)
-                }
-                ev.drops = arrayOf()
+            if (ev.isCancelled) return
+            for (drop in ev.drops) {
+                StackStoragePlugin.getInstance().getApi().addItem(p, drop)
             }
+            ev.drops = arrayOf()
         } catch (ex: Exception) {
             p.sendMessage("${ReefNotice.ERROR}${ex.message}")
         }
