@@ -36,7 +36,7 @@ dependencies {
     testCompileOnly("com.github.bbo51dog:Ecokkit:1.0.1")
     compileOnly("com.github.Creeperface01:ScoreboardAPI:master")
     testCompileOnly("com.github.Creeperface01:ScoreboardAPI:master")
-    compileOnly("com.github.ReefNetwork:Nukkit:master-SNAPSHOT")
+    compileOnly("com.github.ReefNetwork:Nukkit:-SNAPSHOT")
     testCompileOnly("com.github.ReefNetwork:Nukkit:master-SNAPSHOT")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("com.github.Ree-jp-minecraft:StackStorage_nukkit:dev-SNAPSHOT")
