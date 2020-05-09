@@ -33,9 +33,7 @@ data class Skill(
     override val wight: Int
 ) : ISkill, DataJson() {
 
-    override var isCool: Boolean
-        get() = false
-        set(value) {}
+    override var isCool = false
 
     override fun skillRange(vec3: Vector3, p: Player): List<Vector3> {
         val result = mutableListOf<Vector3>()
