@@ -11,6 +11,7 @@
 
 package net.ree_jp.reefseichi.system.seichi.api
 
+import net.ree_jp.reefseichi.system.seichi.data.Skill
 import net.ree_jp.reefseichi.system.seichi.sql.SeichiHelper
 
 class SeichiAPI(private val helper: SeichiHelper) {
@@ -29,6 +30,14 @@ class SeichiAPI(private val helper: SeichiHelper) {
         if (!helper.isExists(xuid)) throw Exception("プレイヤーのデータが見つかりません")
 
         return helper.getData(xuid).xp
+    }
+
+    fun setSkill(xuid: String, skill: Skill) {
+        if (!helper.isExists(xuid)) throw Exception("プレイヤーのデータが見つかりません")
+
+        val data = helper.getData(xuid)
+        data.skill = skill
+        helper.setData(xuid, data)
     }
 
     private fun setXp(xuid: String, xp: Int) {
