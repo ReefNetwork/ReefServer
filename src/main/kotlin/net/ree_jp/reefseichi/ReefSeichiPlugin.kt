@@ -14,6 +14,7 @@ package net.ree_jp.reefseichi
 import cn.nukkit.plugin.PluginBase
 import cn.nukkit.utils.TextFormat
 import net.ree_jp.reefseichi.event.EventListener
+import net.ree_jp.reefseichi.event.FormListener
 import net.ree_jp.reefseichi.system.ban.ReefBan
 import net.ree_jp.reefseichi.system.customMessage.ReefCustomMessage
 import net.ree_jp.reefseichi.system.discord.ReefDiscord
@@ -67,6 +68,8 @@ class ReefSeichiPlugin : PluginBase() {
         val pm = server.pluginManager
 
         pm.registerEvents(EventListener(), this)
+        pm.registerEvents(FormListener(), this)
+
         ReefBan.registerListener(this)
         ReefCustomMessage.registerListener(this)
         ReefDiscord.registerListener(this)
