@@ -33,7 +33,7 @@ class SeichiListener : Listener {
         val seichiData = seichi.getHelper().getData(xuid)
 
         try {
-            if (ev.isCancelled or !p.isSurvival) return
+            if (ev.isCancelled || !p.isSurvival) return
             api.addXp(xuid, 1)
 
             val skill = seichiData.skill
