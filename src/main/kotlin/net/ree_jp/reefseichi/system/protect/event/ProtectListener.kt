@@ -96,7 +96,7 @@ class ProtectListener : Listener {
             level.addLevelSoundEvent(p, LevelSoundEventPacket.SOUND_BLOCK_END_PORTAL_SPAWN)
             for (i in 1..15) {
                 level.addParticleEffect(
-                    pos.add(-0.5, 1.5, 0.5),
+                    pos.add(0.5, 1.5, 0.5),
                     ParticleEffect.END_CHEST,
                     -1,
                     level.dimension,
