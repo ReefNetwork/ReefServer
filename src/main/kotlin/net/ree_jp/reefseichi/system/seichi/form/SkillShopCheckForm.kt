@@ -49,7 +49,7 @@ class SkillShopCheckForm(
                     )
                 )
             }
-        } else setButton2("${TextFormat.RED}解放できません") {
+        } else setButton1("${TextFormat.RED}解放できません") {
             player.showFormWindow(
                 SkillSelectForm(
                     player,
