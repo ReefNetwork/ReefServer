@@ -64,4 +64,12 @@ open class SqliteHelper(path: String) {
         stmt.setObject(2, value)
         stmt.execute()
     }
+
+    fun deleteValue(xuid: String, key: String) {
+        if (!isExists(xuid)) throw Exception("データが存在しません")
+
+        val stmt = connection.prepareStatement("DELETE FROM '$xuid' WHERE key = ?")
+        stmt.setString(1, key)
+        stmt.execute()
+    }
 }
