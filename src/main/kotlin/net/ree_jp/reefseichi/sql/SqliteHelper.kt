@@ -17,7 +17,7 @@ import java.sql.DriverManager
 
 open class SqliteHelper(path: String) {
 
-    private var connection: Connection
+    protected var connection: Connection
 
     init {
         try {
