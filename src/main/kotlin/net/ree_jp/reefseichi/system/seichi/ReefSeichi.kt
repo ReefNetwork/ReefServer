@@ -41,7 +41,7 @@ class ReefSeichi {
             pm.registerEvents(SeichiListener(), plugin)
             pm.registerEvents(SeichiStatusListener(), plugin)
 
-            Server.getInstance().scheduler.scheduleDelayedTask(
+            Server.getInstance().scheduler.scheduleRepeatingTask(
                 ReefSeichiPlugin.getInstance(),
                 { getInstance().getStatusAPI().showStatusAll() },
                 20

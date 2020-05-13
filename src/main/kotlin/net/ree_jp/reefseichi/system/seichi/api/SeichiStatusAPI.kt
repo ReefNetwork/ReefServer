@@ -17,7 +17,6 @@ import cn.nukkit.utils.TextFormat
 import gt.creeperface.nukkit.scoreboardapi.ScoreboardAPI
 import gt.creeperface.nukkit.scoreboardapi.scoreboard.SimpleScoreboard
 import net.ree_jp.reefseichi.ReefNotice
-import net.ree_jp.reefseichi.ReefSeichiPlugin
 import net.ree_jp.reefseichi.sql.MoreDataHelper
 import net.ree_jp.reefseichi.system.seichi.ReefSeichi
 import java.time.LocalDateTime
@@ -52,11 +51,6 @@ class SeichiStatusAPI {
                 p.sendMessage("${ReefNotice.ERROR}${ex.message}")
             }
         }
-        Server.getInstance().scheduler.scheduleDelayedTask(
-            ReefSeichiPlugin.getInstance(),
-            { ReefSeichi.getInstance().getStatusAPI().showStatusAll() },
-            20
-        )
     }
 
     private fun showStatus(p: Player) {
