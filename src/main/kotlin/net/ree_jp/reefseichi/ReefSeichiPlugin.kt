@@ -18,6 +18,7 @@ import net.ree_jp.reefseichi.event.FormListener
 import net.ree_jp.reefseichi.system.ban.ReefBan
 import net.ree_jp.reefseichi.system.customMessage.ReefCustomMessage
 import net.ree_jp.reefseichi.system.discord.ReefDiscord
+import net.ree_jp.reefseichi.system.fly.ReefFly
 import net.ree_jp.reefseichi.system.protect.ReefProtect
 import net.ree_jp.reefseichi.system.seichi.ReefSeichi
 
@@ -75,6 +76,7 @@ class ReefSeichiPlugin : PluginBase() {
         ReefDiscord.registerListener(this)
         ReefSeichi.registerListener(this)
         ReefProtect.registerListener(this)
+        ReefFly.registerListener(this)
 
         ReefDiscord.login()
     }
