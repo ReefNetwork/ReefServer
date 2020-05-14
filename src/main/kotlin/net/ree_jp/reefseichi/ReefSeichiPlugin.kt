@@ -46,6 +46,7 @@ class ReefSeichiPlugin : PluginBase() {
         saveDefaultConfig()
 
         listenerRegister()
+        loadWorld()
         Thread.sleep(1000)
         ReefDiscord.getBot().sendMessage("サーバーが起動しました")
         logger.info(TextFormat.GREEN.toString() + "Reef" + TextFormat.YELLOW + "Seichi" + TextFormat.LIGHT_PURPLE + "Enable")
@@ -63,6 +64,12 @@ class ReefSeichiPlugin : PluginBase() {
         if (!config.exists(type)) throw Exception("キーがありません")
 
         return config.get(type, String())
+    }
+
+    fun loadWorld() {
+        server.loadLevel("dig_1")
+        server.loadLevel("dig_2")
+        server.loadLevel("dig_3")
     }
 
     private fun listenerRegister() {
