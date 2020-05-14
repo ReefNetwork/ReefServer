@@ -31,7 +31,7 @@ class MainMenuForm(player: Player, content: String) : Response, FormWindowSimple
         val fly = ReefFly.getInstance().getApi()
         val ecokkit = EcokkitAPI.instance
 
-        addButton(ElementButton("ワールドを移動する") { player.showFormWindow(MainMenuForm(player, "")) })
+        addButton(ElementButton("ワールドを移動する") { player.showFormWindow(WorldSelectForm(player, "")) })
         addButton(ElementButton("スキルを選択する") { player.showFormWindow(SkillSelectForm(player, "")) })
         addButton(ElementButton("フライを${if (fly.isFly(xuid)) "${TextFormat.GREEN}有効" else "${TextFormat.GRAY}無効"}${TextFormat.RESET}にする\n${ReefFly.FLY_PRICE}/m coin") {
             if (fly.isCanFlyWorld(player.getLevel()) && ecokkit.getMoney(xuid) >= ReefFly.FLY_PRICE) {
