@@ -17,6 +17,9 @@ import net.ree_jp.reefseichi.system.protect.data.LandData
 
 class ProtectAPI {
 
+    val start = mutableMapOf<String, Position>()
+    val end = mutableMapOf<String, Position>()
+
     fun isProtect(xuid: String, pos: Position): Boolean {
         val helper = ReefProtect.getInstance().getHelper()
 
@@ -73,6 +76,10 @@ class ProtectAPI {
     fun getPrice(land: LandData): Int {
         val count = (land.maxX - land.minX).toInt() * (land.maxZ - land.minZ).toInt()
         return count * 10
+    }
+
+    fun isGetPoint(xuid: String): Boolean {
+        return start.contains(xuid) && end.contains(xuid)
     }
 
     private fun isCanBuy(xuid: String, land: LandData): Boolean {
