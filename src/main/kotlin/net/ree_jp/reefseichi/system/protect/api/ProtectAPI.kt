@@ -44,7 +44,7 @@ class ProtectAPI {
         val helper = ReefProtect.getInstance().getHelper()
 
         for (land in helper.getAll()) {
-            if (land.intersectsWith(buyLand)) throw Exception("土地が見つかりません")
+            if (land.intersectsWith(buyLand)) throw Exception("土地がかぶっています")
         }
         helper.setLand(buyLand.getOwner(), buyLand.id, buyLand)
     }
