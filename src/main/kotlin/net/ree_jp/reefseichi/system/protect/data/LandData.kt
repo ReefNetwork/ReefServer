@@ -37,8 +37,12 @@ class LandData(
         return min.getZ()
     }
 
-    override fun clone(): AxisAlignedBB {
-        TODO("Not yet implemented")
+    override fun clone(): LandData {
+        return clone(id)
+    }
+
+    fun clone(id: String): LandData {
+        return LandData(min, max, owner, id, level, subUser, spawnPoint, canSkill)
     }
 
     override fun getMaxX(): Double {
