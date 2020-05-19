@@ -21,6 +21,7 @@ import net.bbo51dog.ecokkit.api.EcokkitAPI
 import net.ree_jp.reefseichi.ReefNotice
 import net.ree_jp.reefseichi.system.fly.ReefFly
 import net.ree_jp.reefseichi.system.mywarp.form.MyWarpSelectForm
+import net.ree_jp.reefseichi.system.protect.form.ProtectAdminForm
 import net.ree_jp.reefseichi.system.seichi.form.SkillSelectForm
 import net.ree_jp.storage.StackStoragePlugin
 
@@ -41,6 +42,7 @@ class MainMenuForm(player: Player, content: String) : Response, FormWindowSimple
         })
         addButton(ElementButton("ストレージを開く") { StackStoragePlugin.getInstance().getApi().sendGui(player) })
         addButton(ElementButton("マイワープ") { player.showFormWindow(MyWarpSelectForm(player, "")) })
+        addButton(ElementButton("土地保護") { player.showFormWindow(ProtectAdminForm(player, "")) })
     }
 
     override fun handleResponse(player: Player, response: FormResponse) {

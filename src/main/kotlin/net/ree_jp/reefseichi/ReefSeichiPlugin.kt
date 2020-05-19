@@ -11,6 +11,7 @@
 
 package net.ree_jp.reefseichi
 
+import cn.nukkit.level.generator.Normal
 import cn.nukkit.plugin.PluginBase
 import cn.nukkit.utils.TextFormat
 import net.ree_jp.reefseichi.event.EventListener
@@ -67,6 +68,9 @@ class ReefSeichiPlugin : PluginBase() {
     }
 
     fun loadWorld() {
+        server.generateLevel("dig_1", java.util.Random().nextLong(), Normal::class.java)
+        server.generateLevel("dig_2", java.util.Random().nextLong(), Normal::class.java)
+        server.generateLevel("dig_3", java.util.Random().nextLong(), Normal::class.java)
         server.loadLevel("dig_1")
         server.loadLevel("dig_2")
         server.loadLevel("dig_3")
