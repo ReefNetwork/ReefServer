@@ -17,6 +17,8 @@ import net.ree_jp.reefseichi.sql.SqliteHelper
 class MyWarpHelper : SqliteHelper("${ReefSeichiPlugin.getInstance().dataFolder}/mywarp.db") {
 
     fun getAllKey(xuid: String): List<String> {
+        if (!isExists(xuid)) return listOf()
+
         val keys = mutableListOf<String>()
         val result = connection.createStatement().executeQuery("SELECT key FROM '$xuid'")
         while (result.next()) keys.add(result.getString("key"))
