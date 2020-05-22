@@ -22,6 +22,7 @@ public class FloatingTextEntity extends Entity {
 
     public FloatingTextEntity(FullChunk chunk, CompoundTag nbt) {
         super(chunk, nbt);
+        setScale(0f);
         setNameTagVisible();
         setNameTagAlwaysVisible();
     }
