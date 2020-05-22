@@ -11,9 +11,10 @@
 
 package net.ree_jp.reefseichi
 
-import cn.nukkit.level.generator.Normal
+import cn.nukkit.entity.Entity
 import cn.nukkit.plugin.PluginBase
 import cn.nukkit.utils.TextFormat
+import net.ree_jp.reefseichi.entity.FloatingTextEntity
 import net.ree_jp.reefseichi.event.EventListener
 import net.ree_jp.reefseichi.event.FormListener
 import net.ree_jp.reefseichi.system.ban.ReefBan
@@ -47,6 +48,7 @@ class ReefSeichiPlugin : PluginBase() {
         saveDefaultConfig()
 
         listenerRegister()
+        entityRegister()
         loadWorld()
         Thread.sleep(1000)
         ReefDiscord.getBot().sendMessage("サーバーが起動しました")
@@ -67,10 +69,10 @@ class ReefSeichiPlugin : PluginBase() {
         return config.get(type, String())
     }
 
-    fun loadWorld() {
-        server.generateLevel("dig_1", java.util.Random().nextLong(), Normal::class.java)
-        server.generateLevel("dig_2", java.util.Random().nextLong(), Normal::class.java)
-        server.generateLevel("dig_3", java.util.Random().nextLong(), Normal::class.java)
+    private fun loadWorld() {
+        server.generateLevel("dig_1")
+        server.generateLevel("dig_2")
+        server.generateLevel("dig_3")
         server.loadLevel("dig_1")
         server.loadLevel("dig_2")
         server.loadLevel("dig_3")
@@ -90,6 +92,10 @@ class ReefSeichiPlugin : PluginBase() {
         ReefFly.registerListener(this)
 
         ReefDiscord.login()
+    }
+
+    private fun entityRegister() {
+        Entity.registerEntity("FloatingText", FloatingTextEntity::class.java)
     }
 
     private fun showStartMessage() {
