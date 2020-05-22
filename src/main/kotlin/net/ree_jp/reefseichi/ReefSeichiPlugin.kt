@@ -98,6 +98,14 @@ class ReefSeichiPlugin : PluginBase() {
         Entity.registerEntity("FloatingText", FloatingTextEntity::class.java)
     }
 
+    private fun removeTempEntity() {
+        for (level in server.levels.values) {
+            for (entity in level.entities) {
+                if (entity is FloatingTextEntity && entity.isTempEntity) entity.close()
+            }
+        }
+    }
+
     private fun showStartMessage() {
         print("\nRRRRRR                 fff  SSSSS         iii        hh      iii  SSSSS\n")
         print("RR   RR   eee    eee  ff   SS        eee        cccc hh          SS        eee  rr rr  vv   vv   eee  rr rr\n")

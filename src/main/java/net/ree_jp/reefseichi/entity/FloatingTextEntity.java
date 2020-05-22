@@ -18,6 +18,8 @@ import cn.nukkit.nbt.tag.CompoundTag;
 
 public class FloatingTextEntity extends Entity {
 
+    public boolean isTempEntity = true;
+
     public FloatingTextEntity(FullChunk chunk, CompoundTag nbt) {
         super(chunk, nbt);
         setNameTagVisible();
@@ -34,6 +36,4 @@ public class FloatingTextEntity extends Entity {
         y = pos.y;
         z = pos.z;
     }
-
-
 }
