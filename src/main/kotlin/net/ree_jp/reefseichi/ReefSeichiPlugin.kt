@@ -57,6 +57,7 @@ class ReefSeichiPlugin : PluginBase() {
     }
 
     override fun onDisable() {
+        removeTempEntity()
         ReefDiscord.getBot().sendMessage("サーバーを停止しました")
         Thread.sleep(300)
         logger.info(TextFormat.GREEN.toString() + "Reef" + TextFormat.YELLOW + "Seichi" + TextFormat.GRAY + "Disable")
