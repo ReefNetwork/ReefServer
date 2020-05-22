@@ -40,7 +40,7 @@ class MyWarpCreateForm(content: String) : Response, FormWindowCustom("マイワ�
         val ecokkit = EcokkitAPI.instance
         val price = ReefMyWarp.CREATE_PRICE
 
-        if (!helper.isExistsKey(xuid, id)) throw Exception("すでにその名前のポイントは存在しています")
+        if (helper.isExistsKey(xuid, id)) throw Exception("すでにその名前のポイントは存在しています")
         if (ecokkit.getMoney(xuid) < price) throw Exception("お金が足りません")
 
         ecokkit.reduceMoney(xuid, price)
