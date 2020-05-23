@@ -32,8 +32,8 @@ repositories {
 }
 
 dependencies {
-    compileOnly("com.github.bbo51dog:Ecokkit:1.0.1")
-    testCompileOnly("com.github.bbo51dog:Ecokkit:1.0.1")
+    compileOnly("com.github.ReefNetwork:Ecokkit:1.0.2")
+    testCompileOnly("com.github.ReefNetwork:Ecokkit:1.0.2")
     compileOnly("com.github.Creeperface01:ScoreboardAPI:master")
     testCompileOnly("com.github.Creeperface01:ScoreboardAPI:master")
     compileOnly("com.github.ReefNetwork:Nukkit:790d1c16cd")
