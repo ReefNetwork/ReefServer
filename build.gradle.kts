@@ -24,16 +24,19 @@ repositories {
     jcenter()
     mavenCentral()
     maven(
-        url  = uri("https://jitpack.io")
+        url = uri("https://jitpack.io")
     )
     maven(
         url = uri("https://repo.nukkitx.com/main/")
     )
+    maven(
+        url = uri("http://jenkins.onebone.me/plugin/repository/everything/")
+    )
 }
 
 dependencies {
-    compileOnly("com.github.ReefNetwork:Ecokkit:1.0.2")
-    testCompileOnly("com.github.ReefNetwork:Ecokkit:1.0.2")
+    compileOnly("me.onebone:economyapi:1.0.0")
+    testCompileOnly("me.onebone:economyapi:1.0.0")
     compileOnly("com.github.Creeperface01:ScoreboardAPI:master")
     testCompileOnly("com.github.Creeperface01:ScoreboardAPI:master")
     compileOnly("com.github.ReefNetwork:Nukkit:790d1c16cd")

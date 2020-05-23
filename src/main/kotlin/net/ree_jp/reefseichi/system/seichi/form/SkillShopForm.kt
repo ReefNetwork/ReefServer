@@ -17,7 +17,7 @@ import cn.nukkit.form.response.FormResponse
 import cn.nukkit.form.response.FormResponseSimple
 import cn.nukkit.form.window.FormWindowSimple
 import cn.nukkit.utils.TextFormat
-import net.bbo51dog.ecokkit.api.EcokkitAPI
+import me.onebone.economyapi.EconomyAPI
 import net.ree_jp.reefseichi.form.Response
 import net.ree_jp.reefseichi.system.seichi.ReefSeichi
 import net.ree_jp.reefseichi.system.seichi.data.Skill
@@ -99,7 +99,7 @@ data class SellSkill(
         val seichi = ReefSeichi.getInstance()
         val data = seichi.getHelper().getData(xuid)
 
-        if ((EcokkitAPI.instance.getMoney(xuid) >= coin) &&
+        if ((EconomyAPI.getInstance().myMoney(p) >= coin) &&
             (seichi.getLevel(data.xp) >= level) &&
             (!data.skills.contains(skill))
         ) return true

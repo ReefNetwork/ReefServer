@@ -16,7 +16,7 @@ import cn.nukkit.form.response.FormResponse
 import cn.nukkit.form.response.FormResponseModal
 import cn.nukkit.form.window.FormWindowModal
 import cn.nukkit.utils.TextFormat
-import net.bbo51dog.ecokkit.api.EcokkitAPI
+import me.onebone.economyapi.EconomyAPI
 import net.ree_jp.reefseichi.ReefNotice
 import net.ree_jp.reefseichi.form.Response
 import net.ree_jp.reefseichi.system.seichi.ReefSeichi
@@ -38,7 +38,7 @@ class SkillShopCheckForm(
         val xuid = player.loginChainData.xuid
         if (skill.isCanBuy(player)) {
             setButton1("解放する") {
-                EcokkitAPI.instance.reduceMoney(xuid, skill.coin)
+                EconomyAPI.getInstance().reduceMoney(player, skill.coin.toDouble())
                 addSkill(xuid, skill.skill)
                 player.sendMessage("${ReefNotice.SUCCESS}${skillName}を開放しました")
                 player.showFormWindow(

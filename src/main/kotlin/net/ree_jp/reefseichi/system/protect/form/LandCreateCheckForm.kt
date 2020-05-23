@@ -19,7 +19,7 @@ import cn.nukkit.form.response.FormResponseCustom
 import cn.nukkit.form.window.FormWindowCustom
 import cn.nukkit.level.Position
 import cn.nukkit.math.Vector3
-import net.bbo51dog.ecokkit.api.EcokkitAPI
+import me.onebone.economyapi.EconomyAPI
 import net.ree_jp.reefseichi.ReefNotice
 import net.ree_jp.reefseichi.form.Response
 import net.ree_jp.reefseichi.system.protect.ReefProtect
@@ -60,18 +60,18 @@ class LandCreateCheckForm(player: Player, content: String) : Response, FormWindo
         val api = protect.getApi()
         val helper = protect.getHelper()
         val xuid = player.loginChainData.xuid
-        val ecokkit = EcokkitAPI.instance
+        val economy = EconomyAPI.getInstance()
         val id = response.getInputResponse(1)
         val price = api.getPrice(land)
 
-        if (ecokkit.getMoney(xuid) < price) {
+        if (economy.myMoney(player) < price) {
             player.sendMessage("${ReefNotice.SUCCESS}お金が足りません")
         } else if (helper.isExists(xuid, id)) {
             player.sendMessage("${ReefNotice.SUCCESS}すでにその名前の土地は存在しています")
         } else {
             try {
                 api.addProtect(land.clone(id))
-                ecokkit.reduceMoney(xuid, price)
+                economy.reduceMoney(player, price.toDouble())
                 player.sendMessage("${ReefNotice.SUCCESS}土地を購入しました")
             } catch (ex: Exception) {
                 player.sendMessage("${ReefNotice.ERROR}土地を購入出来ませんでした")

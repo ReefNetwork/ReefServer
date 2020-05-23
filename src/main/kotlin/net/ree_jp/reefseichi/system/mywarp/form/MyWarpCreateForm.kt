@@ -17,7 +17,7 @@ import cn.nukkit.form.element.ElementLabel
 import cn.nukkit.form.response.FormResponse
 import cn.nukkit.form.response.FormResponseCustom
 import cn.nukkit.form.window.FormWindowCustom
-import net.bbo51dog.ecokkit.api.EcokkitAPI
+import me.onebone.economyapi.EconomyAPI
 import net.ree_jp.reefseichi.ReefNotice
 import net.ree_jp.reefseichi.form.Response
 import net.ree_jp.reefseichi.system.mywarp.ReefMyWarp
@@ -37,13 +37,13 @@ class MyWarpCreateForm(content: String) : Response, FormWindowCustom("マイワ�
         val api = warp.getAPI()
         val helper = warp.getHelper()
         val id = response.getInputResponse(1)
-        val ecokkit = EcokkitAPI.instance
+        val economy = EconomyAPI.getInstance()
         val price = ReefMyWarp.CREATE_PRICE
 
         if (helper.isExistsKey(xuid, id)) throw Exception("すでにその名前のポイントは存在しています")
-        if (ecokkit.getMoney(xuid) < price) throw Exception("お金が足りません")
+        if (economy.myMoney(player) < price) throw Exception("お金が足りません")
 
-        ecokkit.reduceMoney(xuid, price)
+        economy.reduceMoney(player, price.toDouble())
         api.setPoint(xuid, id, player)
         player.sendMessage("${ReefNotice.SUCCESS}$id を作成しました")
     }

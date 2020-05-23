@@ -14,7 +14,7 @@ package net.ree_jp.reefseichi.system.fly.api
 import cn.nukkit.Player
 import cn.nukkit.Server
 import cn.nukkit.level.Level
-import net.bbo51dog.ecokkit.api.EcokkitAPI
+import me.onebone.economyapi.EconomyAPI
 import net.ree_jp.reefseichi.ReefNotice
 import net.ree_jp.reefseichi.system.fly.ReefFly
 
@@ -50,7 +50,7 @@ class FlyAPI {
     }
 
     fun cutAll() {
-        val api = EcokkitAPI.instance
+        val economy = EconomyAPI.getInstance()
         val players = mutableMapOf<String, Player>()
         val price = ReefFly.FLY_PRICE
         for (p in Server.getInstance().onlinePlayers.values) players[p.loginChainData.xuid] = p
@@ -58,11 +58,13 @@ class FlyAPI {
             if (players.containsKey(xuid)) {
                 val p = players[xuid] ?: return
 
-                api.reduceMoney(xuid, price)
-                if (api.getMoney(xuid) < price) {
+                if (economy.myMoney(p) < price) {
                     setFly(p, false)
                     p.sendMessage("${ReefNotice.SUCCESS}お金が足りないためフライを終了しました")
-                } else p.sendMessage("${ReefNotice.SUCCESS}フライは継続中です")
+                } else {
+                    economy.reduceMoney(p, price.toDouble())
+                    p.sendMessage("${ReefNotice.SUCCESS}フライは継続中です")
+                }
             } else list.remove(xuid)
         }
     }

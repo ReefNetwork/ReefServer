@@ -14,7 +14,7 @@
 [![pipeline status](https://gitlab.com/Ree-jp/ReefAutoUpdate/badges/dev/pipeline.svg)](https://gitlab.com/Ree-jp/ReefAutoUpdate/-/commits/dev)
 
 # Required plugin
-[Ecokkit](https://github.com/bbo51dog/Ecokkit)  
+[Economy](https://github.com/Nukkit-coders/EconomyAPI)  
 [ScoreBoardAPI](https://github.com/Creeperface01/ScoreboardAPI)  
 StackStorage_nukkit 
 
