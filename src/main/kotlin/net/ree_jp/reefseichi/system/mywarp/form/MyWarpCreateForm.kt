@@ -40,11 +40,18 @@ class MyWarpCreateForm(content: String) : Response, FormWindowCustom("マイワ�
         val economy = EconomyAPI.getInstance()
         val price = ReefMyWarp.CREATE_PRICE
 
-        if (helper.isExistsKey(xuid, id)) throw Exception("すでにその名前のポイントは存在しています")
-        if (economy.myMoney(player) < price) throw Exception("お金が足りません")
 
-        economy.reduceMoney(player, price.toDouble())
+        if (helper.isExistsKey(xuid, id)) {
+            player.sendMessage("${ReefNotice.SUCCESS}すでにその名前のポイントは存在しています")
+            return
+        }
+        if (economy.myMoney(player) < price) {
+            player.sendMessage("${ReefNotice.SUCCESS}お金が足りません")
+            return
+        }
+
         api.setPoint(xuid, id, player)
+        economy.reduceMoney(player, price.toDouble())
         player.sendMessage("${ReefNotice.SUCCESS}$id を作成しました")
     }
 }

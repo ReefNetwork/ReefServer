@@ -13,7 +13,6 @@ package net.ree_jp.reefseichi.system.mywarp.api
 
 import cn.nukkit.Server
 import cn.nukkit.level.Position
-import cn.nukkit.math.Vector3
 import com.google.gson.Gson
 import net.ree_jp.reefseichi.data.DataJson
 import net.ree_jp.reefseichi.system.mywarp.ReefMyWarp
@@ -29,16 +28,28 @@ class MyWarpAPI {
 
     fun setPoint(xuid: String, id: String, pos: Position) {
         val helper = ReefMyWarp.getInstance().getHelper()
-        val point = PosPoint(pos, pos.level.folderName)
+        val point = PosPoint.create(pos)
 
         helper.setValue(xuid, id, point.toJson())
     }
 }
 
-data class PosPoint(val pos: Vector3, val level: String) : DataJson() {
+data class PosPoint(
+    val x: Double,
+    val y: Double,
+    val z: Double,
+    val level: String
+) : DataJson() {
+
+    companion object {
+
+        fun create(pos: Position): PosPoint {
+            return PosPoint(pos.x, pos.y, pos.z, pos.level.folderName)
+        }
+    }
 
     fun toPosition(): Position {
         val level = Server.getInstance().getLevelByName(level)
-        return Position.fromObject(pos, level)
+        return Position(x, y, z, level)
     }
 }
