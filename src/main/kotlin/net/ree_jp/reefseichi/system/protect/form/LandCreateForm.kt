@@ -53,6 +53,8 @@ class LandCreateForm(player: Player, content: String) : Response, FormWindowSimp
     }
 
     private fun posToStoring(pos: Position): String {
-        return "${pos.level.folderName}:${pos.floorX}.${pos.floorY}.${pos.floorZ}"
+        val level = pos.level ?: return "設定されていません"
+
+        return "${level.folderName}:${pos.floorX}.${pos.floorY}.${pos.floorZ}"
     }
 }
