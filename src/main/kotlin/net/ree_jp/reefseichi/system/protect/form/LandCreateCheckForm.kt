@@ -48,7 +48,7 @@ class LandCreateCheckForm(player: Player, content: String) : Response, FormWindo
         )
 
         land = LandData.create(min, max, xuid, "", player.level, listOf(), min, true)
-        val count = (land.maxX - land.minX).toInt() * (land.maxZ - land.minZ).toInt()
+        val count = ((land.maxX - land.minX).toInt() + 1) * ((land.maxZ - land.minZ).toInt() + 1)
 
         addElement(ElementLabel("$content 本当に土地を購入しますか?\n合計$count ブロックです\n${api.getPrice(land)}円です\n購入する場合は土地の名前を決めて下の欄に入力してください"))
         addElement(ElementInput("土地の名前を入力してください(変更することはできません)"))

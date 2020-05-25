@@ -77,7 +77,7 @@ class LandData(
     }
 
     override fun getMaxZ(): Double {
-        return max.toVector3().getY()
+        return max.toVector3().getZ()
     }
 
     override fun getMinY(): Double {
