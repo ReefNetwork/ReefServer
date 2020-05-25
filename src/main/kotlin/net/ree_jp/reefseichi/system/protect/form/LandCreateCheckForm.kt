@@ -37,7 +37,7 @@ class LandCreateCheckForm(player: Player, content: String) : Response, FormWindo
 
         val min = Position(
             if (start.floorX <= end.floorX) start.floorX.toDouble() else end.floorX.toDouble(),
-            0.0,
+            start.y,
             if (start.floorZ <= end.floorZ) start.floorZ.toDouble() else end.floorZ.toDouble(),
             player.level
         )
