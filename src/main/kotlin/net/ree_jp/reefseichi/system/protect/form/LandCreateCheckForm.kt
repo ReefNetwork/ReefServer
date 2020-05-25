@@ -27,7 +27,7 @@ import net.ree_jp.reefseichi.system.protect.data.LandData
 
 class LandCreateCheckForm(player: Player, content: String) : Response, FormWindowCustom("土地訪問") {
 
-    private lateinit var land: LandData
+    private var land: LandData
 
     init {
         val xuid = player.loginChainData.xuid
@@ -38,7 +38,8 @@ class LandCreateCheckForm(player: Player, content: String) : Response, FormWindo
         val min = Position(
             if (start.floorX <= end.floorX) start.floorX.toDouble() else end.floorX.toDouble(),
             0.0,
-            if (start.floorZ <= end.floorZ) start.floorZ.toDouble() else end.floorZ.toDouble()
+            if (start.floorZ <= end.floorZ) start.floorZ.toDouble() else end.floorZ.toDouble(),
+            player.level
         )
         val max = Vector3(
             if (start.floorX > end.floorX) start.floorX.toDouble() else end.floorX.toDouble(),
@@ -46,7 +47,7 @@ class LandCreateCheckForm(player: Player, content: String) : Response, FormWindo
             if (start.floorZ > end.floorZ) start.floorZ.toDouble() else end.floorZ.toDouble()
         )
 
-        val land = LandData(min, max, xuid, "", player.level, listOf(), min, true)
+        land = LandData.create(min, max, xuid, "", player.level, listOf(), min, true)
         val count = (land.maxX - land.minX).toInt() * (land.maxZ - land.minZ).toInt()
 
         addElement(ElementLabel("$content 本当に土地を購入しますか?\n合計$count ブロックです\n${api.getPrice(land)}円です\n購入する場合は土地の名前を決めて下の欄に入力してください"))

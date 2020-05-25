@@ -24,7 +24,7 @@ class ProtectAPI {
         val helper = ReefProtect.getInstance().getHelper()
 
         for (land in helper.getAll()) {
-            if (land.isVectorInside(pos) && land.level.folderName == pos.level.folderName && !land.isMember(xuid)) {
+            if (land.isVectorInside(pos) && land.getLevel().folderName == pos.level.folderName && !land.isMember(xuid)) {
                 return true
             }
         }
@@ -35,7 +35,7 @@ class ProtectAPI {
         val helper = ReefProtect.getInstance().getHelper()
 
         for (land in helper.getAll()) {
-            if (land.isVectorInside(pos) && land.level.folderName == pos.level.folderName) return land
+            if (land.isVectorInside(pos) && land.getLevel().folderName == pos.level.folderName) return land
         }
         throw Exception("土地が見つかりません")
     }

@@ -29,7 +29,7 @@ class ProtectAdminForm(player: Player, content: String) : Response, FormWindowSi
 
         for (land in helper.getAll(xuid)) {
             addButton(ElementButton(land.id) {
-                player.teleport(land.spawnPoint)
+                player.teleport(land.getSpawnPoint())
                 player.sendMessage("${ReefNotice.SUCCESS}${land.id} にテレポートしました")
             })
         }

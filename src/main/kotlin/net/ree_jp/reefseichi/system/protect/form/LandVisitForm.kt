@@ -43,7 +43,7 @@ class LandVisitForm(content: String) : Response, FormWindowCustom("土地訪問"
             player.sendMessage("${ReefNotice.SUCCESS}土地が見つかりません")
         } else {
             val land = helper.getLand(user.xuid, id)
-            player.teleport(land.spawnPoint)
+            player.teleport(land.getSpawnPoint())
             player.sendMessage("${ReefNotice.SUCCESS}$id にテレポートしました")
         }
     }
