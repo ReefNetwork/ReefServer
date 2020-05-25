@@ -54,7 +54,7 @@ class FlyAPI {
         val players = mutableMapOf<String, Player>()
         val price = ReefFly.FLY_PRICE
         for (p in Server.getInstance().onlinePlayers.values) players[p.loginChainData.xuid] = p
-        for (xuid in list) {
+        for (xuid in list.iterator()) {
             if (players.containsKey(xuid)) {
                 val p = players[xuid] ?: return
 
