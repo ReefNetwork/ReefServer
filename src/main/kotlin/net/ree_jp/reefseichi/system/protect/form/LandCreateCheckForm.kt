@@ -23,6 +23,7 @@ import me.onebone.economyapi.EconomyAPI
 import net.ree_jp.reefseichi.ReefNotice
 import net.ree_jp.reefseichi.form.Response
 import net.ree_jp.reefseichi.system.protect.ReefProtect
+import net.ree_jp.reefseichi.system.protect.api.ProtectAPI
 import net.ree_jp.reefseichi.system.protect.data.LandData
 
 class LandCreateCheckForm(player: Player, content: String) : Response, FormWindowCustom("土地訪問") {
@@ -48,9 +49,10 @@ class LandCreateCheckForm(player: Player, content: String) : Response, FormWindo
         )
 
         land = LandData.create(min, max, xuid, "", player.level, listOf(), min, true)
-        val count = ((land.maxX - land.minX).toInt() + 1) * ((land.maxZ - land.minZ).toInt() + 1)
+        val count = api.getCount(land)
+        val price = ProtectAPI.LAND_PRICE
 
-        addElement(ElementLabel("$content 本当に土地を購入しますか?\n合計$count ブロックです\n${api.getPrice(land)}円です\n購入する場合は土地の名前を決めて下の欄に入力してください"))
+        addElement(ElementLabel("$content 本当に土地を購入しますか?\n合計$count ブロックです\n${count * price}円です\n購入する場合は土地の名前を決めて下の欄に入力してください"))
         addElement(ElementInput("土地の名前を入力してください(変更することはできません)"))
     }
 
@@ -63,7 +65,7 @@ class LandCreateCheckForm(player: Player, content: String) : Response, FormWindo
         val xuid = player.loginChainData.xuid
         val economy = EconomyAPI.getInstance()
         val id = response.getInputResponse(1)
-        val price = api.getPrice(land)
+        val price = api.getCount(land) * ProtectAPI.LAND_PRICE
 
         if (economy.myMoney(player) < price) {
             player.sendMessage("${ReefNotice.SUCCESS}お金が足りません")
