@@ -24,6 +24,15 @@ class ProtectAPI {
     val start = mutableMapOf<String, Position>()
     val end = mutableMapOf<String, Position>()
 
+    fun existsProtect(pos: Position): Boolean {
+        val helper = ReefProtect.getInstance().getHelper()
+
+        for (land in helper.getAll()) {
+            if (land.isVectorInside(pos) && land.getLevel().folderName == pos.level.folderName) return true
+        }
+        return false
+    }
+
     fun isProtect(xuid: String, pos: Position): Boolean {
         val helper = ReefProtect.getInstance().getHelper()
 

@@ -24,7 +24,7 @@ import cn.nukkit.level.ParticleEffect
 import cn.nukkit.network.protocol.LevelSoundEventPacket
 import net.ree_jp.reefseichi.ReefNotice
 import net.ree_jp.reefseichi.ReefSeichiPlugin
-import net.ree_jp.reefseichi.api.ReefAPI
+import net.ree_jp.reefseichi.sql.ReefHelper
 import net.ree_jp.reefseichi.system.protect.ReefProtect
 
 class ProtectListener : Listener {
@@ -42,16 +42,19 @@ class ProtectListener : Listener {
         var message = "${ReefNotice.SUCCESS}この場所ではブロックを掘ることは出来ません"
 
         try {
+            val isLand = api.existsProtect(pos)
             when (level.folderName) {
                 "dig_1" -> return
-                "dig_2" -> if (!api.isProtect(xuid, pos)) return else {
+                "dig_2" -> if (isLand && !api.isProtect(xuid, pos)) return else if (isLand) {
                     val land = api.getLand(pos)
                     message =
-                        "${ReefNotice.SUCCESS}この場所は${ReefAPI.getInstance().getName(land.getOwner())}さんの${land.id} です"
+                        "${ReefNotice.SUCCESS}この場所は${ReefHelper.getInstance()
+                            .getUser(land.getOwner()).name}さんの${land.id} です"
                 }
             }
             showBlockMessage(p, pos, message, ev)
         } catch (ex: Exception) {
+            ex.printStackTrace()
             p.sendMessage("${ReefNotice.ERROR}${ex.message}")
             ev.setCancelled()
         }
@@ -68,16 +71,19 @@ class ProtectListener : Listener {
         var message = "${ReefNotice.SUCCESS}この場所ではブロックを置くことは出来ません"
 
         try {
+            val isLand = api.existsProtect(pos)
             when (level.folderName) {
                 "dig_1" -> return
-                "dig_2" -> if (!api.isProtect(xuid, pos)) return else {
+                "dig_2" -> if (isLand && !api.isProtect(xuid, pos)) return else if (isLand) {
                     val land = api.getLand(pos)
                     message =
-                        "${ReefNotice.SUCCESS} この場所は${ReefAPI.getInstance().getName(land.getOwner())} さんの${land.id} です"
+                        "${ReefNotice.SUCCESS}この場所は${ReefHelper.getInstance()
+                            .getUser(land.getOwner()).name} さんの${land.id} です"
                 }
             }
             showBlockMessage(p, pos, message, ev)
         } catch (ex: Exception) {
+            ex.printStackTrace()
             p.sendMessage("${ReefNotice.ERROR}${ex.message}")
             ev.setCancelled()
         }
