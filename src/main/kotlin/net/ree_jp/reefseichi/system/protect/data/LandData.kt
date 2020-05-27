@@ -18,7 +18,7 @@ import cn.nukkit.math.Vector3
 import net.ree_jp.reefseichi.data.PosPoint
 import net.ree_jp.reefseichi.data.Vec3Point
 
-class LandData(
+data class LandData(
     private val min: Vec3Point,
     private val max: Vec3Point,
     private val owner: String,
