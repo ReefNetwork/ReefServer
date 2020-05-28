@@ -13,12 +13,14 @@ package net.ree_jp.reefseichi.system.protect.event
 
 import cn.nukkit.Player
 import cn.nukkit.Server
+import cn.nukkit.block.Block
 import cn.nukkit.event.Cancellable
 import cn.nukkit.event.EventHandler
 import cn.nukkit.event.EventPriority
 import cn.nukkit.event.Listener
 import cn.nukkit.event.block.BlockBreakEvent
 import cn.nukkit.event.block.BlockPlaceEvent
+import cn.nukkit.event.player.PlayerInteractEvent
 import cn.nukkit.level.Location
 import cn.nukkit.level.ParticleEffect
 import cn.nukkit.network.protocol.LevelSoundEventPacket
@@ -34,25 +36,10 @@ class ProtectListener : Listener {
     @EventHandler(priority = EventPriority.LOW)
     fun breakForProtectLand(ev: BlockBreakEvent) {
         val p = ev.player
-        val xuid = p.loginChainData.xuid
-        val pos = ev.block.location
-        val level = p.level
-        val api = ReefProtect.getInstance().getApi()
-
-        var message = "${ReefNotice.SUCCESS}この場所ではブロックを掘ることは出来ません"
+        val message = "${ReefNotice.SUCCESS}この場所ではブロックを掘ることは出来ません"
 
         try {
-            val isLand = api.existsProtect(pos)
-            when (level.folderName) {
-                "dig_1" -> return
-                "dig_2" -> if (isLand && !api.isProtect(xuid, pos)) return else if (isLand) {
-                    val land = api.getLand(pos)
-                    message =
-                        "${ReefNotice.SUCCESS}この場所は${ReefHelper.getInstance()
-                            .getUser(land.getOwner()).name}さんの${land.id} です"
-                }
-            }
-            showBlockMessage(p, pos, message, ev)
+            isEditLand(p, ev.block, message, ev)
         } catch (ex: Exception) {
             ex.printStackTrace()
             p.sendMessage("${ReefNotice.ERROR}${ex.message}")
@@ -63,30 +50,53 @@ class ProtectListener : Listener {
     @EventHandler(priority = EventPriority.LOW)
     fun placeForProtectLand(ev: BlockPlaceEvent) {
         val p = ev.player
-        val xuid = p.loginChainData.xuid
-        val pos = ev.block.location
-        val level = p.level
-        val api = ReefProtect.getInstance().getApi()
-
-        var message = "${ReefNotice.SUCCESS}この場所ではブロックを置くことは出来ません"
+        val message = "${ReefNotice.SUCCESS}この場所ではブロックを置くことは出来ません"
 
         try {
-            val isLand = api.existsProtect(pos)
-            when (level.folderName) {
-                "dig_1" -> return
-                "dig_2" -> if (isLand && !api.isProtect(xuid, pos)) return else if (isLand) {
-                    val land = api.getLand(pos)
-                    message =
-                        "${ReefNotice.SUCCESS}この場所は${ReefHelper.getInstance()
-                            .getUser(land.getOwner()).name} さんの${land.id} です"
-                }
-            }
-            showBlockMessage(p, pos, message, ev)
+            isEditLand(p, ev.block, message, ev)
         } catch (ex: Exception) {
             ex.printStackTrace()
             p.sendMessage("${ReefNotice.ERROR}${ex.message}")
             ev.setCancelled()
         }
+    }
+
+    @EventHandler(priority = EventPriority.LOW)
+    fun tapForProtectLand(ev: PlayerInteractEvent) {
+        val p = ev.player
+        val message = "${ReefNotice.SUCCESS}この場所でその動作は出来ません"
+
+        try {
+            isEditLand(p, ev.block, message, ev)
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+            p.sendMessage("${ReefNotice.ERROR}${ex.message}")
+            ev.setCancelled()
+        }
+    }
+
+    private fun isEditLand(p: Player, block: Block, message: String, ev: Cancellable) {
+        val xuid = p.loginChainData.xuid
+        val pos = block.location
+        val level = p.level
+        val api = ReefProtect.getInstance().getApi()
+        val isLand = api.existsProtect(pos)
+
+        if (ev is PlayerInteractEvent && level.folderName == "lobby") {
+            return
+        }
+
+        when (level.folderName) {
+            "dig_1", "dig_2" -> return
+            "dig_3" -> if (isLand && !api.isProtect(xuid, pos)) return else if (isLand) {
+                val land = api.getLand(pos)
+                showBlockMessage(
+                    p, pos, "${ReefNotice.SUCCESS}この場所は${ReefHelper.getInstance()
+                        .getUser(land.getOwner()).name}さんの${land.id} です", ev
+                )
+            }
+        }
+        showBlockMessage(p, pos, message, ev)
     }
 
     private fun showBlockMessage(p: Player, pos: Location, message: String, ev: Cancellable) {
