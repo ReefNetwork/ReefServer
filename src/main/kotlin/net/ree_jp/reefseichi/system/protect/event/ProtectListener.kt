@@ -20,6 +20,7 @@ import cn.nukkit.event.EventPriority
 import cn.nukkit.event.Listener
 import cn.nukkit.event.block.BlockBreakEvent
 import cn.nukkit.event.block.BlockPlaceEvent
+import cn.nukkit.event.block.ItemFrameDropItemEvent
 import cn.nukkit.event.player.PlayerInteractEvent
 import cn.nukkit.level.Location
 import cn.nukkit.level.ParticleEffect
@@ -75,12 +76,31 @@ class ProtectListener : Listener {
         }
     }
 
+    @EventHandler(priority = EventPriority.LOW)
+    fun frameDropForProtect(ev: ItemFrameDropItemEvent) {
+        val p = ev.player
+        val message = "${ReefNotice.SUCCESS}保護されています"
+
+        try {
+            isEditLand(p, ev.block, message, ev)
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+            p.sendMessage("${ReefNotice.ERROR}${ex.message}")
+            ev.setCancelled()
+        }
+    }
+
     private fun isEditLand(p: Player, block: Block, message: String, ev: Cancellable) {
         val xuid = p.loginChainData.xuid
         val pos = block.location
         val level = p.level
         val api = ReefProtect.getInstance().getApi()
         val isLand = api.existsProtect(pos)
+
+        if (protect.contains(xuid)) {
+            ev.setCancelled()
+            return
+        }
 
         if (ev is PlayerInteractEvent && level.folderName == "lobby") {
             return
@@ -107,18 +127,17 @@ class ProtectListener : Listener {
             p.sendActionBar(message)
             return
         }
-        if (!protect.contains(xuid)) {
-            p.sendMessage(message)
-            level.addLevelSoundEvent(p, LevelSoundEventPacket.SOUND_BLOCK_END_PORTAL_SPAWN)
-            for (i in 1..15) {
-                level.addParticleEffect(
-                    pos.add(0.5, 1.5, 0.5),
-                    ParticleEffect.END_CHEST,
-                    -1,
-                    level.dimension,
-                    listOf(p)
-                )
-            }
+
+        p.sendMessage(message)
+        level.addLevelSoundEvent(p, LevelSoundEventPacket.SOUND_BLOCK_END_PORTAL_SPAWN)
+        for (i in 1..15) {
+            level.addParticleEffect(
+                pos.add(0.5, 1.5, 0.5),
+                ParticleEffect.END_CHEST,
+                -1,
+                level.dimension,
+                listOf(p)
+            )
         }
         protect.add(xuid)
         Server.getInstance().scheduler.scheduleDelayedTask(
