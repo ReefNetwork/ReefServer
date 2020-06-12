@@ -41,7 +41,7 @@ class SeichiListener : Listener {
             if (!skill.isCool && seichiData.mana >= skill.mana) {
                 skill.isCool = true
                 for (vec3 in skill.skillRange(ev.block.location, p)) {
-                    level.useBreakOn(vec3, ev.item)
+                    if (vec3 != ev.block.location) level.useBreakOn(vec3, ev.item)
                 }
                 Server.getInstance().scheduler.scheduleDelayedTask(
                     ReefSeichiPlugin.getInstance(),
@@ -58,7 +58,7 @@ class SeichiListener : Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.HIGHEST)
     fun breakForPutStorage(ev: BlockBreakEvent) {
         val p = ev.player
 
