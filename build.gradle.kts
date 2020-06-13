@@ -13,6 +13,7 @@ plugins {
     java
     maven
     kotlin("jvm") version "1.3.71"
+    id("org.jetbrains.dokka-android") version "0.9.17"
     id("com.github.johnrengelman.shadow") version "5.2.0"
     id("net.minecrell.plugin-yml.nukkit") version "0.3.0"
 }
@@ -37,6 +38,8 @@ repositories {
 dependencies {
     compileOnly("me.onebone:economyapi:1.0.0")
     testCompileOnly("me.onebone:economyapi:1.0.0")
+    compileOnly("com.github.ReefNetwork:SimpleBuilder:a076f0ff8c")
+    testCompileOnly("com.github.ReefNetwork:SimpleBuilder:a076f0ff8c")
     compileOnly("com.github.Creeperface01:ScoreboardAPI:master")
     testCompileOnly("com.github.Creeperface01:ScoreboardAPI:master")
     compileOnly("com.github.ReefNetwork:Nukkit:790d1c16cd")
