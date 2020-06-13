@@ -17,6 +17,7 @@ import cn.nukkit.event.EventPriority
 import cn.nukkit.event.Listener
 import cn.nukkit.event.block.BlockBreakEvent
 import cn.nukkit.network.protocol.LevelSoundEventPacket
+import me.onebone.economyapi.EconomyAPI
 import net.ree_jp.reefseichi.ReefNotice
 import net.ree_jp.reefseichi.ReefSeichiPlugin
 import net.ree_jp.reefseichi.system.seichi.ReefSeichi
@@ -30,6 +31,7 @@ class SeichiListener : Listener {
         val xuid = p.loginChainData.xuid
         val seichi = ReefSeichi.getInstance()
         val api = seichi.getAPI()
+        val economy = EconomyAPI.getInstance()
         val seichiData = seichi.getHelper().getData(xuid)
 
         try {
@@ -39,9 +41,13 @@ class SeichiListener : Listener {
             val skill = seichiData.skill
             val level = p.level
             if (!skill.isCool && seichiData.mana >= skill.mana) {
+                economy.addMoney(p, 1.0)
                 skill.isCool = true
                 for (vec3 in skill.skillRange(ev.block.location, p)) {
-                    if (vec3 != ev.block.location) level.useBreakOn(vec3, ev.item)
+                    if (vec3 != ev.block.location) {
+                        level.useBreakOn(vec3, ev.item)
+                        economy.addMoney(p, 0.1)
+                    }
                 }
                 Server.getInstance().scheduler.scheduleDelayedTask(
                     ReefSeichiPlugin.getInstance(),
