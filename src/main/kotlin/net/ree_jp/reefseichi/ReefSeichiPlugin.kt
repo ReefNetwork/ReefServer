@@ -58,6 +58,7 @@ class ReefSeichiPlugin : PluginBase() {
 
     override fun onDisable() {
         removeTempEntity()
+        writeData()
         ReefDiscord.getBot().sendMessage("サーバーを停止しました")
         Thread.sleep(300)
         logger.info(TextFormat.GREEN.toString() + "Reef" + TextFormat.YELLOW + "Seichi" + TextFormat.GRAY + "Disable")
@@ -93,6 +94,10 @@ class ReefSeichiPlugin : PluginBase() {
         ReefFly.registerListener(this)
 
         ReefDiscord.login()
+    }
+
+    private fun writeData() {
+        ReefSeichi.getInstance().getHelper().save()
     }
 
     private fun entityRegister() {
