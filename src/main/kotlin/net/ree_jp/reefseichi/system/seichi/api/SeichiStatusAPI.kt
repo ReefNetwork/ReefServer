@@ -62,6 +62,10 @@ class SeichiStatusAPI {
             type[xuid] = helper.getValue(xuid, STATUS_DATA_KEY).toInt()
         }
 
+        if (displayColor > 10) {
+            getScoreboard(p).resetAllScores()
+        }
+
         when (type.getValue(xuid)) {
             STATUS_NORMAL_MODE -> showNormal(p)
             STATUS_LIGHT_MODE -> showLight(p)
