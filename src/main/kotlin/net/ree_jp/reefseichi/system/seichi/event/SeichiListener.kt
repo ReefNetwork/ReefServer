@@ -41,12 +41,12 @@ class SeichiListener : Listener {
             val skill = seichiData.skill
             val level = p.level
             if (!skill.isCool && seichiData.mana >= skill.mana) {
-                economy.addMoney(p, 1.0)
+                economy.addMoney(p, 0.1)
                 skill.isCool = true
                 for (vec3 in skill.skillRange(ev.block.location, p)) {
                     if (vec3 != ev.block.location) {
                         level.useBreakOn(vec3, ev.item)
-                        economy.addMoney(p, 0.1)
+                        economy.addMoney(p, 0.01)
                     }
                 }
                 Server.getInstance().scheduler.scheduleDelayedTask(
@@ -60,11 +60,12 @@ class SeichiListener : Listener {
             }
         } catch (ex: Exception) {
             ev.setCancelled()
+            ex.printStackTrace()
             p.sendMessage("${ReefNotice.ERROR}${ex.message}")
         }
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.MONITOR)
     fun breakForPutStorage(ev: BlockBreakEvent) {
         val p = ev.player
 
@@ -75,6 +76,7 @@ class SeichiListener : Listener {
             }
             ev.drops = arrayOf()
         } catch (ex: Exception) {
+            ex.printStackTrace()
             p.sendMessage("${ReefNotice.ERROR}${ex.message}")
         }
     }
