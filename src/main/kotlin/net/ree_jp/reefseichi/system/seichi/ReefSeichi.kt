@@ -56,7 +56,7 @@ class ReefSeichi {
     private lateinit var helper: SeichiHelper
 
     private val levelList = mapOf(
-        1 to 1, 2 to 100, 3 to 1000, 4 to 2500, 5 to 5000,
+        1 to 0, 2 to 100, 3 to 1000, 4 to 2500, 5 to 5000,
         6 to 7000, 7 to 9000, 8 to 11000, 9 to 13000, 10 to 15000,
         11 to 18000, 12 to 21000, 13 to 24000, 14 to 27000, 15 to 30000
     )
@@ -92,7 +92,7 @@ class ReefSeichi {
     }
 
     fun getNextLevel(xp: Int): Int {
-        val level = getLevel(xp)
+        val level = getLevel(xp) + 1
         val needXp = levelList[level] ?: throw Exception("不正なレベル")
         return needXp - xp
     }
