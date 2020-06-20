@@ -68,11 +68,20 @@ class SeichiListener : Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     fun breakForPutStorage(ev: BlockBreakEvent) {
         val p = ev.player
+        val bl = ev.block
+        val inv = p.inventory
+        val api = StackStoragePlugin.getInstance().getApi()
 
         try {
             if (ev.isCancelled) return
             for (drop in ev.drops) {
-                StackStoragePlugin.getInstance().getApi().addItem(p, drop)
+                when {
+                    api.isCanStorage(drop) -> api.addItem(p, drop)
+
+                    inv.canAddItem(drop) -> inv.addItem(drop)
+
+                    else -> bl.level.dropItem(bl.location, drop)
+                }
             }
             ev.drops = arrayOf()
         } catch (ex: Exception) {
