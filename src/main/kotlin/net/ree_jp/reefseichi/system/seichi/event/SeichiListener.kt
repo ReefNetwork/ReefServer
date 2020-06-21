@@ -25,7 +25,7 @@ import net.ree_jp.storage.StackStoragePlugin
 
 class SeichiListener : Listener {
 
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.HIGH)
     fun breakForActiveSkill(ev: BlockBreakEvent) {
         val p = ev.player
         val xuid = p.loginChainData.xuid
