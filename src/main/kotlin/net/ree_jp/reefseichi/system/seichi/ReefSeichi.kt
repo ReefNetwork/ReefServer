@@ -107,7 +107,7 @@ class ReefSeichi {
         )
     }
 
-    private fun getDefaultSkill(): Skill {
+    fun getDefaultSkill(): Skill {
         return Skill("default", 0, 1, 1, 1, 1)
     }
 }

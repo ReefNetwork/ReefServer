@@ -20,6 +20,7 @@ import cn.nukkit.network.protocol.LevelSoundEventPacket
 import me.onebone.economyapi.EconomyAPI
 import net.ree_jp.reefseichi.ReefNotice
 import net.ree_jp.reefseichi.ReefSeichiPlugin
+import net.ree_jp.reefseichi.system.ban.api.ReefBanAPI
 import net.ree_jp.reefseichi.system.seichi.ReefSeichi
 import net.ree_jp.storage.StackStoragePlugin
 
@@ -38,15 +39,24 @@ class SeichiListener : Listener {
             if (ev.isCancelled || !p.isSurvival) return
             api.addXp(xuid, 1)
 
-            val skill = seichiData.skill
             val level = p.level
-            if (!skill.isCool && seichiData.mana >= skill.mana) {
+            var skill = seichiData.skill
+            if (p.isSneaking) {
+                seichiData.skills.forEach {
+                    if (it.name == seichi.getDefaultSkill().name) skill = it
+                }
+            }
+            if (seichiData.mana < skill.mana) {
+                p.sendActionBar("${ReefNotice.SUCCESS}クールタイム中です")
+                ev.setCancelled()
+            }
+            if (!skill.isCool) {
                 economy.addMoney(p, 0.1)
+                seichiData.mana = skill.mana - seichiData.mana
                 skill.isCool = true
                 for (vec3 in skill.skillRange(ev.block.location, p)) {
                     if (vec3 != ev.block.location) {
                         level.useBreakOn(vec3, ev.item)
-                        economy.addMoney(p, 0.01)
                     }
                 }
                 Server.getInstance().scheduler.scheduleDelayedTask(
@@ -57,6 +67,13 @@ class SeichiListener : Listener {
                         level.addLevelSoundEvent(p, LevelSoundEventPacket.SOUND_NOTE)
                     }, skill.coolTime
                 )
+            } else {
+                if (skill.name == seichi.getDefaultSkill().name) {
+                    val ex = Exception().stackTrace[0]
+                    val location = ex.className + ex.lineNumber
+                    ReefBanAPI.getInstance().setBan(xuid, location)
+                }
+                economy.addMoney(p, 0.01)
             }
         } catch (ex: Exception) {
             ev.setCancelled()
