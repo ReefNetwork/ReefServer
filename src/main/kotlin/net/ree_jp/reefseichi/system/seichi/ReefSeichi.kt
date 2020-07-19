@@ -56,9 +56,11 @@ class ReefSeichi {
     private lateinit var helper: SeichiHelper
 
     private val levelList = mapOf(
-        1 to 0, 2 to 100, 3 to 1000, 4 to 2500, 5 to 5000,
-        6 to 7000, 7 to 9000, 8 to 11000, 9 to 13000, 10 to 15000,
-        11 to 18000, 12 to 21000, 13 to 24000, 14 to 27000, 15 to 30000
+        1 to 0, 2 to 100, 3 to 1000, 4 to 3500, 5 to 6000,
+        6 to 9000, 7 to 12000, 8 to 16000, 9 to 21000, 10 to 25000,
+        11 to 30000, 12 to 35000, 13 to 40000, 14 to 45000, 15 to 50000,
+        16 to 60000, 17 to 70000, 18 to 80000, 19 to 90000, 20 to 100000,
+        21 to 115000, 22 to 130000, 23 to 145000, 24 to 160000, 25 to 175000
     )
 
     fun getAPI(): SeichiAPI {
