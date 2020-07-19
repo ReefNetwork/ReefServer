@@ -46,7 +46,7 @@ class EventListener : Listener {
             if (!user.address.contains(deviceId)) {
                 val deviceIdList = user.deviceId.toMutableList()
                 deviceIdList.add(deviceId)
-                helper.setUser(xuid, n, deviceIdList, user.deviceId)
+                helper.setUser(xuid, n, user.address, deviceIdList)
             }
         } else {
             helper.setUser(xuid, n, listOf(address), listOf(deviceId))
