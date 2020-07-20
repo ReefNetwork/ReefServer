@@ -32,30 +32,6 @@ class ReefAPI(private val helper: ReefHelper): IReefAPI {
         return helper.isExistsUser(xuid)
     }
 
-    override fun register(xuid: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun getXuid(name: String): String {
-        TODO("Not yet implemented")
-    }
-
-    override fun getName(xuid: String): String {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun setName(xuid: String) {
-        TODO("Not yet implemented")
-    }
-
-    override fun addAddress(xuid: String, address: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun addDevice(xuid: String, deviceId: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
     override fun getUser(xuid: String): User {
         if (!isExists(xuid)) return User.createResult(xuid)
 
