@@ -11,7 +11,6 @@
 
 package net.ree_jp.reefseichi.system.seichi.sql
 
-import com.google.gson.Gson
 import net.ree_jp.reefseichi.system.seichi.ReefSeichi
 import net.ree_jp.reefseichi.system.seichi.data.SeichiData
 import net.ree_jp.reefseichi.system.seichi.data.Skill
@@ -96,9 +95,5 @@ class SeichiHelper(path: String) : ISeichiHelper {
     private fun createTable() {
         connection.createStatement()
             .execute("CREATE TABLE IF NOT EXISTS seichi(xuid TEXT NOT NULL PRIMARY KEY ,skill TEXT NOT NULL ,skills TEXT NOT NULL ,xp INTEGER NOT NULL ,mana INTEGER NOT NULL )")
-    }
-
-    private fun getSKill(json: String): Skill {
-        return Gson().fromJson(json, Skill::class.java)
     }
 }
