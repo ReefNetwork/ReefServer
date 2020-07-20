@@ -80,14 +80,14 @@ class SeichiHelper(path: String) : ISeichiHelper {
     }
 
     private fun write(seichiData: SeichiData) {
-        val jsonSkills = mutableListOf<String>()
+        val skills = mutableListOf<String>()
         for (skill in seichiData.skills) {
-            jsonSkills.add(skill.name)
+            skills.add(skill.name)
         }
         val stmt = connection.prepareStatement("REPLACE INTO seichi VALUES (?, ?, ?, ?, ?)")
         stmt.setString(1, seichiData.xuid)
         stmt.setString(2, seichiData.skill.name)
-        stmt.setString(3, jsonSkills.joinToString("*separator*"))
+        stmt.setString(3, skills.joinToString("*separator*"))
         stmt.setInt(4, seichiData.xp)
         stmt.setInt(5, seichiData.mana)
         stmt.execute()
