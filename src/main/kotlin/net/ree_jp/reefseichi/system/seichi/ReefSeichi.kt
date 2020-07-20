@@ -63,6 +63,13 @@ class ReefSeichi {
         21 to 115000, 22 to 130000, 23 to 145000, 24 to 160000, 25 to 175000
     )
 
+    val skills = mapOf(
+        getDefaultSkill().name to getDefaultSkill(),
+        "1*2" to Skill("1*2", 3, 3, 1, 2, 1),
+        "3*3" to Skill("3*3", 10, 5, 1, 3, 3),
+        "3*3*3" to Skill("3*3*3", 20, 20, 3, 3, 3)
+    )
+
     fun getAPI(): SeichiAPI {
         if (!::api.isInitialized) {
             api = SeichiAPI(getHelper())

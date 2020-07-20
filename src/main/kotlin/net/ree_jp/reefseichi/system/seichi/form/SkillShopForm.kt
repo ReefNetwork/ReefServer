@@ -24,36 +24,15 @@ import net.ree_jp.reefseichi.system.seichi.data.Skill
 
 class SkillShopForm(player: Player, content: String) : Response, FormWindowSimple("スキルショップ", content) {
 
-    val sellSkills = listOf(
-        SellSkill(
-            Skill(
-                "1*2",
-                3,
-                3,
-                1,
-                2,
-                1
-            ), 3, 100
+    private val sellSkills = listOf(
+        SellSkill.create(
+            "1*2", 3, 100
         ),
-        SellSkill(
-            Skill(
-                "3*3",
-                10,
-                5,
-                1,
-                3,
-                3
-            ), 5, 5000
+        SellSkill.create(
+            "3*3", 5, 5000
         ),
-        SellSkill(
-            Skill(
-                "3*3*3",
-                20,
-                20,
-                3,
-                3,
-                3
-            ), 15, 50000
+        SellSkill.create(
+            "3*3*3", 15, 50000
         )
     )
 
@@ -88,6 +67,14 @@ data class SellSkill(
     val level: Int,
     val coin: Int
 ) {
+
+    companion object {
+        fun create(name: String, level: Int, coin: Int): SellSkill {
+            val seichi = ReefSeichi.getInstance()
+            val skill = seichi.skills[name] ?: throw Exception("不明なスキル")
+            return SellSkill(skill, level, coin)
+        }
+    }
 
     fun getDescription(): String {
         val space = "${skill.height}.${skill.wight}.${skill.depth}"

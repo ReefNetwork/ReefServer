@@ -62,15 +62,17 @@ class SeichiHelper(path: String) : ISeichiHelper {
         val stmt = connection.prepareStatement("SELECT * FROM seichi WHERE xuid = ?")
         stmt.setString(1, xuid)
         val result = stmt.executeQuery()
-        val jsonSkill = result.getString("skill")
-        val jsonSKills = result.getString("skills").split("*separator*")
+
+        val seichi = ReefSeichi.getInstance()
+        val skillName = result.getString("skill")
+        val skillsName = result.getString("skills").split("*separator*")
         val skills = mutableListOf<Skill>()
-        for (skill in jsonSKills) {
-            skills.add(getSKill(skill))
+        for (skill in skillsName) {
+            skills.add(seichi.skills[skill] ?: throw Exception("所持スキル:$skill が見つかりませんでした"))
         }
         return SeichiData(
             xuid,
-            getSKill(jsonSkill),
+            seichi.skills[skillName] ?: throw Exception("選択中のスキル:$skillName が見つかりませんでした"),
             skills,
             result.getInt("xp"),
             result.getInt("mana")
@@ -80,11 +82,11 @@ class SeichiHelper(path: String) : ISeichiHelper {
     private fun write(seichiData: SeichiData) {
         val jsonSkills = mutableListOf<String>()
         for (skill in seichiData.skills) {
-            jsonSkills.add(skill.toJson())
+            jsonSkills.add(skill.name)
         }
         val stmt = connection.prepareStatement("REPLACE INTO seichi VALUES (?, ?, ?, ?, ?)")
         stmt.setString(1, seichiData.xuid)
-        stmt.setString(2, seichiData.skill.toJson())
+        stmt.setString(2, seichiData.skill.name)
         stmt.setString(3, jsonSkills.joinToString("*separator*"))
         stmt.setInt(4, seichiData.xp)
         stmt.setInt(5, seichiData.mana)
