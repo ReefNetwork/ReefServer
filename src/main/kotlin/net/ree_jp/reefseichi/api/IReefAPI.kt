@@ -18,4 +18,8 @@ interface IReefAPI {
     fun isExists(xuid: String): Boolean
 
     fun getUser(xuid: String): User
+
+    fun isVip(xuid: String): Boolean
+
+    fun setVip(xuid: String, bool: Boolean)
 }
