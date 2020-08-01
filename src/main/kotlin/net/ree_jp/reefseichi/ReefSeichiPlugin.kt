@@ -24,6 +24,7 @@ import net.ree_jp.reefseichi.system.discord.ReefDiscord
 import net.ree_jp.reefseichi.system.fly.ReefFly
 import net.ree_jp.reefseichi.system.protect.ReefProtect
 import net.ree_jp.reefseichi.system.seichi.ReefSeichi
+import net.ree_jp.reefseichi.system.test.ReefTest
 import java.util.*
 
 class ReefSeichiPlugin : PluginBase() {
@@ -94,6 +95,7 @@ class ReefSeichiPlugin : PluginBase() {
         ReefSeichi.registerListener(this)
         ReefProtect.registerListener(this)
         ReefFly.registerListener(this)
+        ReefTest.registerListener(this)
 
         ReefDiscord.login()
     }
