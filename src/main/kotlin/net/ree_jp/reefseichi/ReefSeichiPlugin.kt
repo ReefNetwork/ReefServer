@@ -15,6 +15,7 @@ import cn.nukkit.entity.Entity
 import cn.nukkit.level.generator.Normal
 import cn.nukkit.plugin.PluginBase
 import cn.nukkit.utils.TextFormat
+import net.ree_jp.reefseichi.entity.EntityReef
 import net.ree_jp.reefseichi.entity.FloatingTextEntity
 import net.ree_jp.reefseichi.event.EventListener
 import net.ree_jp.reefseichi.event.FormListener
@@ -111,7 +112,7 @@ class ReefSeichiPlugin : PluginBase() {
     private fun removeTempEntity() {
         for (level in server.levels.values) {
             for (entity in level.entities) {
-                if (entity is FloatingTextEntity && entity.isTempEntity) entity.close()
+                if (entity is EntityReef && entity.isTempEntity) entity.close()
             }
         }
     }
