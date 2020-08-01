@@ -13,6 +13,7 @@ package net.ree_jp.reefseichi.system.test
 
 import cn.nukkit.Server
 import cn.nukkit.plugin.PluginBase
+import net.ree_jp.reefseichi.system.test.event.TestListener
 
 class ReefTest {
 
@@ -28,6 +29,8 @@ class ReefTest {
 
         fun registerListener(plugin: PluginBase) {
             val pm = Server.getInstance().pluginManager
+
+            pm.registerEvents(TestListener(), plugin)
         }
     }
 }
