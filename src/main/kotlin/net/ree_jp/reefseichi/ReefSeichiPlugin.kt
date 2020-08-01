@@ -12,6 +12,7 @@
 package net.ree_jp.reefseichi
 
 import cn.nukkit.entity.Entity
+import cn.nukkit.level.generator.Normal
 import cn.nukkit.plugin.PluginBase
 import cn.nukkit.utils.TextFormat
 import net.ree_jp.reefseichi.entity.FloatingTextEntity
@@ -23,6 +24,7 @@ import net.ree_jp.reefseichi.system.discord.ReefDiscord
 import net.ree_jp.reefseichi.system.fly.ReefFly
 import net.ree_jp.reefseichi.system.protect.ReefProtect
 import net.ree_jp.reefseichi.system.seichi.ReefSeichi
+import java.util.*
 
 class ReefSeichiPlugin : PluginBase() {
 
@@ -72,9 +74,9 @@ class ReefSeichiPlugin : PluginBase() {
     }
 
     private fun loadWorld() {
-        server.generateLevel("dig_1")
-        server.generateLevel("dig_2")
-        server.generateLevel("dig_3")
+        server.generateLevel("dig_1", Random().nextLong(), Normal::class.java)
+        server.generateLevel("dig_2", Random().nextLong(), Normal::class.java)
+        server.generateLevel("dig_3", Random().nextLong(), Normal::class.java)
         server.loadLevel("dig_1")
         server.loadLevel("dig_2")
         server.loadLevel("dig_3")
